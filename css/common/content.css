@@ -1,0 +1,8 @@
+.content {
+    position: absolute;
+    top: 56px;
+    left: 226px;
+    width: calc(100% - 226px);
+    height: calc(100vh - 57px);
+    padding: 0 16px;
+}
