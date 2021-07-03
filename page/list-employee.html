@@ -24,8 +24,8 @@
         <div class="top-head">
             <!-- logo -->
             <div class="logo-site">
-                <div class="toggle-icon"></div>
-                <div class="cukcuk-logo"></div>
+                <div class="toggle-icon" data-toggle="tooltip" data-placement="bottom" title="Menu"></div>
+                <div class="cukcuk-logo" data-toggle="tooltip" data-placement="bottom" title="Phần mềm quản lý nhà hàng"></div>
             </div>
             <!-- company -->
             <div class="head-init">
@@ -48,7 +48,7 @@
         <!-- navbar -->
         <div class="navbarweb">
             <div class="navbar-init">
-                <div class="nav-item">
+                <div class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Tổng quan">
                     <div class="nav-item-icon">
                         <i class="fas fa-chart-pie"></i>
                     </div>
@@ -56,7 +56,7 @@
                         Tổng quan
                     </div>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Báo cáo">
                     <div class="nav-item-icon">
                         <i class="fas fa-signal"></i>
                     </div>
@@ -64,7 +64,7 @@
                         Báo cáo
                     </div>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Mua hàng">
                     <div class="nav-item-icon">
                         <i class="fas fa-chart-pie"></i>
                     </div>
@@ -72,7 +72,7 @@
                         Mua hàng
                     </div>
                 </div>
-                <div class="nav-item" style="background-color: #019160; color: white;">
+                <div class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Danh mục nhân viên" style="background-color: #019160; color: white;">
                     <div class="nav-item-icon">
                         <i class="fas fa-users"></i>
                     </div>
@@ -80,12 +80,12 @@
                         Danh mục nhân viên
                     </div>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Thiết lập hệ thống">
                     <div class="nav-item-icon">
                         <i class="fas fa-cog"></i>
                     </div>
                     <div class="nav-item-text">
-                        Thiết lâp hệ thống
+                        Thiết lập hệ thống
                     </div>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                     Danh sách nhân viên
                 </div>
                 <div class="content-feature col-lg-6 col-md-6 col-sm-7">
-                    <button class="btn-add-emp">
+                    <button class="btn-add-emp" data-toggle="tooltip" data-placement="bottom" title="Thêm nhân viên">
                         <i class="fas fa-user-plus"></i>
                         Thêm nhân viên
                     </button>
@@ -114,7 +114,7 @@
                         </div>
                         <!-- Find by department -->
                         <div class="col-2 find-department find-select">
-                            <div class="select" id="findbydepartment">Tất cả phòng ban
+                            <div class="select" id="findbydepartment" data-toggle="tooltip" data-placement="top" title="Tùy chọn phòng ban" data-triggle="hover">Tất cả phòng ban
                             </div>
                             <!-- Option department -->
                             <div class="all-company select-option">
@@ -122,31 +122,31 @@
                                 <div value="department1"><i class="fas fa-check"></i>Phòng nhân sự</div>
                                 <div value="department2"><i class="fas fa-check"></i>Phòng đào tạo</div>
                             </div>
-                            <!-- <i class="fas fa-chevron-up select-up"></i> -->
                             <!-- arrow -->
-                            <div class="div-arrow">
-                                <div class="arrow" id="arrow-department"></div>
+                            <div class="div-arrow arrow-department">
+                                <i class="fas fa-chevron-down arrow department-down"></i>
+                                <i class="fas fa-chevron-up arrow department-up" style="display: none;"></i>
                             </div>
                         </div>
                         <!-- Find by job -->
                         <div class="col-2 find-job find-select">
-                            <div class="select" id="findbyjob">Tất cả vị trí
+                            <div class="select" id="findbyjob" data-toggle="tooltip" data-placement="top" title="Tùy chọn vị trí" data-triggle="hover">Tất cả vị trí
                             </div>
                             <div class="all-job select-option">
                                 <div value="all"><i class="fas fa-check"></i>Tất cả vị trí</div>
                                 <div value="job1"><i class="fas fa-check"></i>Phòng nhân sự</div>
                                 <div div="job2"><i class="fas fa-check"></i>Phòng kế toán</div>
                             </div>
-                            <!-- <i class="fas fa-chevron-up select-up"></i> -->
-                            <div class="div-arrow">
-                                <div class="arrow" id="arrow-job"></div>
+                            <div class="div-arrow arrow-job">
+                                <i class="fas fa-chevron-down arrow job-down"></i>
+                                <i class="fas fa-chevron-up arrow job-up" style="display: none;"></i>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- btn reload -->
                 <div class="col-2 reload">
-                    <i class="fas fa-sync-alt"></i>
+                    <i class="fas fa-sync-alt" data-toggle="tooltip" data-placement="bottom" title="Reload"></i>
                 </div>
             </div>
             <div class="grid grid-employee scroll-body" id="scroll-thumb">
@@ -522,6 +522,14 @@
 <script src='../js/common/ajax.jquery.min.js'></script>
 <script src='../js/common/jquery-3.6.0.min.js'></script>
 <script src="../js/common/jquery.dataTables.min.js"></script>
+<script src="../js/common/jquery-3.2.1.slim.min.js"></script>
+<script src="../js/common/popper.min.js"></script>
+<script src="../js/common/bootstrap.min.js"></script>
 <script src='../js/page/employee.js'></script>
 <script src='../js/common/navbar.js'></script>
+<script>
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 <!-- <script src='../js/common/common.js'></script> -->

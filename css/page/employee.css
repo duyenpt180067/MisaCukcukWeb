@@ -1,5 +1,5 @@
 .grid-employee {
-    height: calc(100vh - 158px);
+    height: calc(100vh - 159px);
 }
 
 .employee {
@@ -85,16 +85,21 @@
     margin: 0 10px;
     padding: 0;
     font-size: 12px;
+    border: solid 1px #bbbbbb;
+    border-radius: 4px;
 }
 
 .content .filter-bar .find-select .select {
     width: inherit;
     height: 40px;
     margin: 0;
-    border: solid 1px #bbbbbb;
-    border-radius: 4px;
-    padding: 12px 16px;
+    padding-right: 35px;
+    padding-left: 16px;
+    padding-top: 12px;
     cursor: default;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .content .filter-bar .find-select .select-option {
@@ -113,6 +118,9 @@
     padding: 10px;
     height: 40px;
     cursor: default;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .content .filter-bar .find-select .select-option div i {
@@ -139,17 +147,26 @@
 
 .content .filter-bar .find-select .div-arrow {
     position: absolute;
-    top: 10px;
-    right: 5px;
-    background-color: white;
-    width: 20px;
+    top: 0;
+    right: 0px;
+    width: 36px;
+    height: 100%;
+    border-left: 1px solid #bbb;
+    border-radius: 0 4px 4px 0;
+    z-index: -1;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.content .filter-bar .find-select .div-arrow:hover {
+    background-color: #bbb;
+    color: white;
 }
 
 .content .filter-bar .find-select .arrow {
     transition: 100ms;
-    background-image: url(../../lib/icon/down.png);
-    width: 20px;
-    height: 17px;
+    font-size: 12px;
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;

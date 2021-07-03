@@ -3,6 +3,16 @@
     top: 56px;
     left: 226px;
     width: calc(100% - 226px);
-    height: calc(100vh - 57px);
+    height: calc(100vh - 59px);
     padding: 0 16px;
+}
+
+
+/* responsive content */
+
+@media (max-width: 900px) {
+    .content {
+        width: calc(100% - 51px);
+        left: 51px;
+    }
 }

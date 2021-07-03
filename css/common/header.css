@@ -79,3 +79,12 @@
 .account i {
     margin-left: 16px;
 }
+
+
+/* responsive header */
+
+@media (max-width: 900px) {
+    .logo-site {
+        border-bottom: 1px solid #e5e5e5;
+    }
+}
