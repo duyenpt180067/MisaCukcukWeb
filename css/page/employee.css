@@ -1,7 +1,3 @@
-.grid-employee {
-    height: calc(100vh - 159px);
-}
-
 .employee {
     height: 100vh;
     width: 100%;
@@ -55,7 +51,8 @@
     border: solid 1px #bbbbbb;
     border-radius: 5px;
     display: inline-flex;
-    align-items: baseline;
+    align-items: center;
+    height: 40px;
 }
 
 .content .filter-bar .findid .all-emp {
@@ -87,11 +84,11 @@
     font-size: 12px;
     border: solid 1px #bbbbbb;
     border-radius: 4px;
+    height: 40px;
 }
 
 .content .filter-bar .find-select .select {
-    width: inherit;
-    height: 40px;
+    width: calc(100% - 36px);
     margin: 0;
     padding-right: 35px;
     padding-left: 16px;
@@ -100,12 +97,15 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    appearance: none;
+    border: none;
+    border-radius: 4px;
 }
 
 .content .filter-bar .find-select .select-option {
     position: absolute;
     padding: 5px 0px;
-    top: 100%;
+    top: calc(100% + 2px);
     left: 0px;
     z-index: 1;
     width: 100%;
@@ -127,6 +127,7 @@
     width: 16px;
     margin-right: 10px;
     color: white;
+    visibility: hidden;
 }
 
 .content .filter-bar .find-select .select-option div:hover {
@@ -148,21 +149,21 @@
 .content .filter-bar .find-select .div-arrow {
     position: absolute;
     top: 0;
-    right: 0px;
-    width: 36px;
+    right: -1px;
+    width: 37px;
     height: 100%;
     border-left: 1px solid #bbb;
     border-radius: 0 4px 4px 0;
-    z-index: -1;
     align-items: center;
     display: flex;
     justify-content: center;
 }
 
-.content .filter-bar .find-select .div-arrow:hover {
+
+/* .content .filter-bar .find-select .div-arrow:hover {
     background-color: #bbb;
     color: white;
-}
+} */
 
 .content .filter-bar .find-select .arrow {
     transition: 100ms;
@@ -170,6 +171,16 @@
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
+}
+
+.choose-option {
+    background-color: #019160;
+    color: white;
+    transition: 100ms;
+}
+
+.iconCheck {
+    visibility: visible;
 }
 
 
@@ -192,7 +203,8 @@
 
 .content .grid {
     width: 100%;
-    height: calc(100% - 158px);
+    height: calc(100% - 171px);
+    margin-top: 15px;
 }
 
 

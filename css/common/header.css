@@ -46,14 +46,40 @@
 
 /* company head-init-left */
 
-.nameofcompany {
+.company {
+    display: flex;
+}
+
+.company .div-arrow {
+    margin-left: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.company .div-arrow .arrow {
+    display: flex;
+    transition: 200ms;
+    font-size: 12px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.name-company {
     border: none;
     font-size: 19px;
     font-weight: 600;
+    appearance: none;
 }
 
-.nameofcompany:focus {
+.name-company:focus {
     outline: none;
+}
+
+.top-head .head-init .company .option-company {
+    position: absolute;
+    top: 45px;
+    font-size: 17px;
 }
 
 
@@ -86,5 +112,12 @@
 @media (max-width: 900px) {
     .logo-site {
         border-bottom: 1px solid #e5e5e5;
+    }
+}
+
+@media (max-width: 700px) {
+    .account .account-image,
+    p {
+        visibility: hidden;
     }
 }

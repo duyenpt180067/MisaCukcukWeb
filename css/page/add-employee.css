@@ -1,24 +1,12 @@
 /* responsive for form add employee */
 
-@media (min-width: 576px) {
+@media (max-width: 768px) {
     .add-emp {
         max-width: 540px;
     }
 }
 
 @media (min-width: 768px) {
-    .add-emp {
-        max-width: 720px;
-    }
-}
-
-@media (min-width: 992px) {
-    .add-emp {
-        max-width: 720px;
-    }
-}
-
-@media (min-width: 1200px) {
     .add-emp {
         max-width: 720px;
     }
@@ -32,7 +20,6 @@
     top: 0;
     display: none;
     width: 100%;
-    height: 730px;
 }
 
 .cover-background {
@@ -54,10 +41,7 @@
     height: calc(100vh - 30px);
     background-color: white;
     margin: auto;
-    /* new */
-    margin-top: 3.5%;
-    max-height: 730px;
-    vertical-align: middle;
+    margin-top: 16px;
 }
 
 .formadd {
@@ -90,6 +74,10 @@
 
 /* css input */
 
+.form-group {
+    margin-bottom: 0;
+}
+
 .infoinput input {
     width: 100%;
     border: solid 3px #e5e5e5;
@@ -114,7 +102,7 @@ span {
     border-radius: 5px;
     padding: 6px;
     width: 100%;
-    height: 41px;
+    height: 36px;
 }
 
 .infoinput .salary input {
