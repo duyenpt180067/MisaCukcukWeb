@@ -99,7 +99,8 @@ p {
     z-index: 1;
     width: 100%;
     background: white;
-    visibility: hidden;
+    /* visibility: hidden; */
+    display: none;
     transition: 100ms;
 }
 

@@ -117,6 +117,10 @@
     visibility: hidden;
 }
 
+.content .filter-bar .find-select .select-option div:focus>i {
+    visibility: visible;
+}
+
 .content .filter-bar .find-select .div-arrow {
     border-left: 1px solid #bbb;
     border-radius: 0 4px 4px 0;

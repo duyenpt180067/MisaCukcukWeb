@@ -30,7 +30,7 @@
             </div>
             <!-- company -->
             <div class="head-init">
-                <div class="company find-select">
+                <div class="find-company find-select">
                     <input class="name-company select" id="company" readonly="true" value="Nhà hàng Biển Đông">
                     <div class="select-option all-company">
                         <div id="company1" class="companies">Nhà hàng Biển Đông</div>
@@ -222,25 +222,32 @@
                                 <div class="row">
                                     <div class="col-6 infoinput  form-group">
                                         <p>Mã nhân viên (<span>*</span>)</p>
-                                        <input type="text" name="code" id="code">
+                                        <input type="text" name="code" id="code" tabindex="0">
                                     </div>
                                     <div class="col-6 infoinput  form-group">
                                         <p>Họ và tên (<span>*</span>)</p>
-                                        <input type="text" name="full_name" id="full_name">
+                                        <input type="text" name="full_name" id="full_name" tabindex="1">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-6 infoinput  form-group">
                                         <p>Ngày sinh</p>
-                                        <input type="date" name="birth" id="birth">
+                                        <input type="date" name="birth" id="birth" tabindex="2">
                                     </div>
                                     <div class="col-6 infoinput  form-group">
                                         <p>Giới tính</p>
-                                        <select name="" id="gender" class="gender infoinput  form-group" value="male" name="gender">
-                                            <option value="male" >Nam</option>
-                                            <option value="female">Nữ</option>
-                                            <option value="other">Khác</option>
-                                        </select>
+                                        <div class="find-select find-gender">
+                                            <input name="" id="gender" class="gender infoinput select form-group" readonly="true" tabindex="3" value="male" name="gender">
+                                            <div class="select-option all-gender">
+                                                <div id="male">Nam</div>
+                                                <div id="female">Nữ</div>
+                                                <div id="other">Khác</div>
+                                            </div>
+                                            <div class="div-arrow arrow-department" id="findbygender">
+                                                <i class="fas fa-chevron-down arrow department-down"></i>
+                                                <i class="fas fa-chevron-up arrow department-up" style="font-size: 0;"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">

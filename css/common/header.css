@@ -46,14 +46,14 @@
 
 /* company head-init-left */
 
-.company {
+.find-company {
     display: flex;
     width: auto;
     position: relative;
     margin: 0;
 }
 
-.company .div-arrow {
+.find-company .div-arrow {
     margin-right: -17px;
     align-items: center;
     display: flex;
@@ -62,7 +62,7 @@
     font-size: 12px;
 }
 
-.company .div-arrow .arrow {
+.find-company .div-arrow .arrow {
     cursor: default;
 }
 
@@ -77,13 +77,13 @@
     outline: none;
 }
 
-.top-head .head-init .company .all-company {
+.top-head .head-init .find-company .all-company {
     position: absolute;
     top: 45px;
     font-size: 17px;
 }
 
-.top-head .head-init .company .all-company .companies {
+.top-head .head-init .find-company .all-company .companies {
     font-size: 17px;
     padding-top: 10px;
     padding-left: 20px;

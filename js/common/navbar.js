@@ -13,16 +13,19 @@ $(document).ready(function() {
             $(".nav-item-text").css('display', 'flex');
             $('.navbarweb').css({
                 'width': '225px',
-                'transition': '100ms'
+                'transition': '500ms'
             });
-            $('.content').css('width', 'calc(100% - 226px)');
+            $('.content').css({
+                'width': 'calc(100% - 226px)',
+                'transition': '500ms'
+            });
             $('.content').css('left', '226px');
             $('.logo-site').css('border-bottom', 'none');
         } else {
             if (checkNavbar == false) { // not show navbar
                 $('.navbarweb').css({
                     'width': '51px',
-                    'transition': '100ms'
+                    'transition': '500ms'
                 });
                 $(".nav-item-text").css('display', 'none');
                 $('.logo-site').css('border-bottom', '1px solid #e5e5e5');
