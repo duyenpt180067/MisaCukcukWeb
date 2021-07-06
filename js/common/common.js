@@ -51,3 +51,11 @@ function delOption(id_select, defaultValue) {
         $(id_select).next().css('visibility', 'hidden');
     })
 }
+
+$(document).ready(function() {
+    Draggable(".add-emp");
+})
+
+function Draggable(_selector) {
+    $(_selector).draggable();
+}
