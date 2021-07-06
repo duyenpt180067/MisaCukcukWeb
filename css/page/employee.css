@@ -7,7 +7,7 @@
 /* .page-title */
 
 .content .content-head {
-    padding: 16px 16px 16px 0;
+    padding: 16px 16px 16px 10px;
 }
 
 .content .content-head .title {
@@ -86,7 +86,6 @@
 
 .content .filter-bar .find-select .select {
     width: calc(100% - 36px);
-    padding-right: 35px;
     padding-left: 16px;
     padding-top: 12px;
     border-radius: 4px;
@@ -94,6 +93,21 @@
 
 .content .filter-bar .find-select .select-option div {
     height: 40px;
+}
+
+.content .filter-bar .find-select .xselect {
+    position: absolute;
+    background-color: #E9EBEE;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 12px;
+    right: 45px;
+    font-size: 10px;
+    visibility: hidden;
 }
 
 .content .filter-bar .find-select .select-option div i {

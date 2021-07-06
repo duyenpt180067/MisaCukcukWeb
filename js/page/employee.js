@@ -1,6 +1,5 @@
-// js data table 
-var listEmployee = [];
-
+var defaultDepartment = $("#department").val();
+var defaultJob = $("#job").val();
 $(document).ready(function() {
     //Load data from API to table employee
     loadData();
@@ -26,14 +25,19 @@ $(document).ready(function() {
     //     }
     // })
 
-    $('#table-body').on('click', 'tr', function() {
+    $('#table-body').on('dblclick', 'tr', function() {
         $(this).siblings().removeClass("choose-option");
         $(this).addClass("choose-option");
+    })
+
+    clickOutElement('#table-tbody tr', function() {
+        $(this).removeClass("choose-option");
     })
 
     // show form add employee
     $('.btn-add-emp').on("click", function() {
         $('.add-item').css('display', 'flex');
+        $('.add-item form #code').val('NV-' + parseInt(findMaxCode() + 1));
     });
     // close form add-emp
     $('.btn-close-add').on("click", function() {
@@ -47,86 +51,72 @@ $(document).ready(function() {
     $('.findid input').on("blur", function() {
         $('.findid').css('border', '1px solid #bbbbbb');
     })
-
 })
 
 
 //js for select department
 var checkDepartment = false;
-$('#findbydepartment').on('click', function() {
+$('#findbydepartment, #department').on('click', function() {
     checkDepartment = !checkDepartment;
     checkJob = false;
-    chooseOption('department', 'departments', checkDepartment);
-    $('#findbydepartment').parent().css('border', '1px solid #01b075');
-    $('#findbydepartment').css('border-right', '1px solid #01b075');
-    $('#findbyjob').parent().css('border', '1px solid #bbbbbb');
-    $('#findbyjob').css('border-right', '1px solid #bbbbbb');
+    chooseOption('#department', '.departments');
     if (checkDepartment == true) {
         checkJobFalse();
         checkDepartmentTrue();
-    } else {
+    }
+    if (checkDepartment == false) {
         checkDepartmentFalse();
     }
     if (checkJob == true) {
         checkDepartmentFalse();
         checkJobTrue();
-    } else {
+    }
+    if (checkJob == false) {
         checkJobFalse();
     }
-})
-
-$('#findbydepartment').on('blur', function() {
-    checkDepartmentFalse();
+    clickOutElement('#findbydepartment, #department', checkDepartmentFalse);
+    delOption('#department', defaultDepartment);
 })
 
 //js for select job
 var checkJob = false;
-$('#findbyjob').on('click', function() {
+$('#findbyjob , #job').on('click', function(event) {
     $('.all-department').css('visibility', 'visible');
     checkJob = !checkJob;
     checkDepartment = false;
-    chooseOption('job', 'jobs', checkJob);
-    $('#findbyjob').parent().css('border', '1px solid #01b075');
-    $('#findbyjob').css('border-right', '1px solid #01b075');
-    $('#findbydepartment').parent().css('border', '1px solid #bbbbbb');
-    $('#findbydepartment').css('border-right', '1px solid #bbbbbb');
+    chooseOption('#job', '.jobs')
     if (checkJob == true) {
+
         checkDepartmentFalse();
         checkJobTrue();
-    } else {
+    }
+    if (checkJob == false) {
         checkJobFalse();
     }
     if (checkDepartment == true) {
         checkJobFalse();
         checkDepartmentTrue();
-    } else {
+    }
+    if (checkDepartment == false) {
         checkDepartmentFalse();
     }
+    clickOutElement('#findbyjob , #job', checkJobFalse);
+    delOption('#job', defaultJob);
 })
-
 
 /**
  * To css and show the option
  * Author: PTDuyen
  */
 function checkDepartmentTrue() {
+    checkDepartment = true;
     $('.department-down').css('font-size', '0');
     $('.department-up').css('font-size', '12px');
     $('.all-department').css('visibility', 'visible');
     $('.all-job').css('visibility', 'hidden');
     $('.arrow-department').css('background-color', '#bbb');
-}
-
-/**
- * To css and show the option of department
- * Author: PTDuyen
- */
-function checkDepartmentTrue() {
-    $('.department-down').css('font-size', '0');
-    $('.department-up').css('font-size', '12px');
-    $('.all-department').css('visibility', 'visible');
-    $('.all-job').css('visibility', 'hidden');
-    $('.arrow-department').css('background-color', '#bbb');
+    $('#findbydepartment').parent().css('border', '1px solid #01b075');
+    $('#findbydepartment').css('border-right', '1px solid #01b075');
 }
 
 /**
@@ -134,10 +124,14 @@ function checkDepartmentTrue() {
  * Author: PTDuyen
  */
 function checkDepartmentFalse() {
+    checkDepartment = false;
     $('.department-down').css('font-size', '12px');
     $('.department-up').css('font-size', '0');
     $('.all-department').css('visibility', 'hidden');
     $('.arrow-department').css('background-color', '#fff');
+    $('.find-select').css('border', '1px splid #bbb');
+    $('#findbydepartment').parent().css('border', '1px solid #bbb');
+    $('#findbydepartment').css('border-right', '1px solid #bbb');
 }
 
 /**
@@ -145,12 +139,14 @@ function checkDepartmentFalse() {
  * Author: PTDuyen
  */
 function checkJobTrue() {
+    checkJob = true;
     $('.job-down').css('font-size', '0');
     $('.job-up').css('font-size', '12px');
     $('.all-job').css('visibility', 'visible');
     $('.all-department').css('visibility', 'hidden');
     $('.arrow-job').css('background-color', '#bbb');
-
+    $('#findbyjob').parent().css('border', '1px solid #01b075');
+    $('#findbyjob').css('border-right', '1px solid #01b075');
 }
 
 /**
@@ -158,28 +154,15 @@ function checkJobTrue() {
  * Author: PTDuyen
  */
 function checkJobFalse() {
+    checkJob = false;
     $('.job-down').css('font-size', '12px');
     $('.job-up').css('font-size', '0');
     $('.all-job').css('visibility', 'hidden');
     $('.arrow-job').css('background-color', '#fff');
+    $('#findbyjob').parent().css('border', '1px solid #bbb');
+    $('#findbyjob').css('border-right', '1px solid #bbb');
 
 }
-
-
-/** Find the max code of employees
- *  Author: PTDuyen
- */
-function findMaxCode() {
-    console.log(listEmployee);
-    let max_code = 0;
-    for (let i = 0; i < listEmployee.length; i++) {
-        if (parseInt(listEmployee[i].EmployeeCode.substr(2)) > max_code) {
-            max_code = parseInt(listEmployee[i].EmployeeCode.substr(2));
-        }
-    }
-    return max_code;
-}
-
 
 
 // save data

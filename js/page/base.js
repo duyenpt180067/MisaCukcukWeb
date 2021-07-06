@@ -3,6 +3,8 @@
  * Author: PTDuyen
  * 5/7/2021
  */
+var listEmployee = [];
+
 function loadData() {
     //get all information of employees from API
     $.get({
@@ -40,4 +42,19 @@ function loadData() {
             alert("Fail!");
         }
     })
+}
+
+
+/** Find the max code of employees
+ *  Author: PTDuyen
+ */
+function findMaxCode() {
+    console.log(listEmployee);
+    let max_code = 0;
+    for (let i = 0; i < listEmployee.length; i++) {
+        if (parseInt(listEmployee[i].EmployeeCode.substr(3)) > max_code) {
+            max_code = parseInt(listEmployee[i].EmployeeCode.substr(3));
+        }
+    }
+    return max_code;
 }
