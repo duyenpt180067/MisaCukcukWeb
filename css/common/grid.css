@@ -15,6 +15,12 @@ td {
     width: 10.53%;
 }
 
+table thead {
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+
 tbody tr:nth-child(odd) {
     background-color: #eee;
 }

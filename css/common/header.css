@@ -48,38 +48,46 @@
 
 .company {
     display: flex;
+    width: auto;
+    position: relative;
+    margin: 0;
 }
 
 .company .div-arrow {
-    margin-left: 10px;
+    margin-right: -10px;
     align-items: center;
     display: flex;
     justify-content: center;
+    transition: 200ms;
+    font-size: 12px;
 }
 
 .company .div-arrow .arrow {
-    display: flex;
-    transition: 200ms;
-    font-size: 12px;
-    background-repeat: no-repeat;
-    background-size: contain;
+    cursor: default;
 }
 
 .name-company {
     border: none;
     font-size: 19px;
     font-weight: 600;
-    appearance: none;
+    width: 190px;
 }
 
 .name-company:focus {
     outline: none;
 }
 
-.top-head .head-init .company .option-company {
+.top-head .head-init .company .all-company {
     position: absolute;
     top: 45px;
     font-size: 17px;
+}
+
+.top-head .head-init .company .all-company .companies {
+    font-size: 17px;
+    padding-top: 10px;
+    padding-left: 20px;
+    font-weight: 500;
 }
 
 
@@ -117,7 +125,7 @@
 
 @media (max-width: 700px) {
     .account .account-image,
-    p {
+    .account p {
         visibility: hidden;
     }
 }

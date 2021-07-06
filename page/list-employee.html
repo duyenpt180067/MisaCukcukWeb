@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh mục nhân viên</title>
     <link rel="stylesheet" href="../css/common/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common/main.css">
     <link rel="stylesheet" href="../css/common/header.css">
     <link rel="stylesheet" href="../css/common/navbar.css">
-    <link rel="stylesheet" href="../css/common/main.css">
     <link rel="stylesheet" href="../lib/font/fontawesome-5.15.1/css/all.min.css">
     <link rel="stylesheet" href="../css/common/content.css">
     <link rel="stylesheet" href="../css/page/employee.css">
@@ -29,21 +29,23 @@
             </div>
             <!-- company -->
             <div class="head-init">
-                <div class="company">
-                    <select class="name-company" id="">
-                        <option value="Nhà hàng Biển Đông">Nhà hàng Biển Đông</option>
-                    </select>
-                    <div class="div-arrow">
-                        <div class="arrow">
-                            <i class="fas fa-chevron-down arrow company-down"></i>
-                            <i class="fas fa-chevron-up arrow company-up" style="font-size: 0;"></i>
-                        </div>
+                <div class="company find-select">
+                    <input class="name-company select" id="company" readonly="true" value="Nhà hàng Biển Đông">
+                    <div class="select-option all-company">
+                        <div id="company1" class="companies">Nhà hàng Biển Đông</div>
+                        <div id="company2" class="companies">Nhà hàng Biển Nam</div>
+                        <div id="company3" class="companies">Nhà hàng Biển Tây</div>
+                    </div>
+                    <div class="div-arrow arrow-company">
+                        <i class="fas fa-chevron-down arrow company-down"></i>
+                        <i class="fas fa-chevron-up arrow company-up" style="font-size: 0;"></i>
                     </div>
                 </div>
                 <div class="account">
                     <!-- <div style="display: flexbox;"> -->
-                    <div class="account-image"></div> Mai Anh Bảo
-                    <i class="fas fa-ellipsis-h"></i>
+                    <div class="account-image"></div>
+                    <p>Mai Anh Bảo</p>
+                    <i class="fas fa-ellipsis-h" data-toggle="tooltip" data-placement="top" title="Tài khoản"></i>
                     <div class="action-account" style="display:none;">
                         <div>Đăng xuất</div>
                         <div>Chỉnh sửa tài khoản</div>
@@ -101,13 +103,13 @@
         <!-- main-body -->
         <div class="content">
             <div class="content-head row">
-                <div class="title col-lg-6 col-md-6 col-sm-5">
+                <div class="title">
                     Danh sách nhân viên
                 </div>
-                <div class="content-feature col-lg-6 col-md-6 col-sm-7">
+                <div class="content-feature ">
                     <button class="btn-add-emp" data-toggle="tooltip" data-placement="bottom" title="Thêm nhân viên">
                         <i class="fas fa-user-plus"></i>
-                        Thêm nhân viên
+                        <span style="color: white;">Thêm nhân viên</span>
                     </button>
                 </div>
             </div>
@@ -121,10 +123,10 @@
                             <i class="fas fa-times all-emp"></i>
                         </div>
                         <!-- Find by department -->
-                        <div class="col-2 find-department find-select">
+                        <div class="col-3 find-department find-select">
                             <input class="select" id="department" data-toggle="tooltip" data-placement="top" title="Tùy chọn phòng ban" data-triggle="hover" value="Tất cả phòng ban">
                             <!-- Option department -->
-                            <div class="all-company select-option">
+                            <div class="all-department select-option">
                                 <div id="all" class="departments"><i class="fas fa-check"></i>Tất cả phòng ban</div>
                                 <div id="department1" class="departments"><i class="fas fa-check"></i>Phòng nhân sự</div>
                                 <div id="department2" class="departments"><i class="fas fa-check"></i>Phòng đào tạo</div>
@@ -136,7 +138,7 @@
                             </div>
                         </div>
                         <!-- Find by job -->
-                        <div class="col-2 find-job find-select">
+                        <div class="col-3 find-job find-select">
                             <input class="select" id="job" data-toggle="tooltip" data-placement="top" title="Tùy chọn vị trí" data-triggle="hover" value="Tất cả vị trí">
                             <div class="all-job select-option">
                                 <div id="all" class="jobs"><i class="fas fa-check"></i>Tất cả vị trí</div>
@@ -336,10 +338,10 @@
 </html>
 <script src='../js/common/jquery-3.6.0.min.js'></script>
 <script src='../js/common/ajax.jquery.min.js'></script>
-<script src="../js/common/jquery.dataTables.min.js"></script>
-<script src="../js/common/jquery.validate.js"></script>
 <script src="../js/common/popper.min.js"></script>
 <script src="../js/common/bootstrap.min.js"></script>
+<script src="../js/common/common.js"></script>
+<script src="../js/page/base.js"></script>
 <script src='../js/page/employee.js'></script>
 <script src='../js/common/header.js'></script>
 <script src='../js/common/navbar.js'></script>
