@@ -10,16 +10,16 @@ $(document).ready(function() {
         // console.log(checkNavbar);
 
         if (checkNavbar == true) { //show navbar
-            $(".nav-item-text").css('display', 'flex');
+            $(".nav-item-text").css({ 'opacicty': '1', 'transition': '500ms' });
             $('.navbarweb').css({
                 'width': '225px',
                 'transition': '500ms'
             });
             $('.content').css({
                 'width': 'calc(100% - 226px)',
-                'transition': '500ms'
+                'transition': '500ms',
+                'left': '226px'
             });
-            $('.content').css('left', '226px');
             $('.logo-site').css('border-bottom', 'none');
         } else {
             if (checkNavbar == false) { // not show navbar
@@ -27,10 +27,13 @@ $(document).ready(function() {
                     'width': '51px',
                     'transition': '500ms'
                 });
-                $(".nav-item-text").css('display', 'none');
+                $(".nav-item-text").css({ 'opacicty': '0', 'transition': '500ms' });
                 $('.logo-site').css('border-bottom', '1px solid #e5e5e5');
-                $('.content').css('width', 'calc(100% - 51px)');
-                $('.content').css('left', '51px');
+                $('.content').css({
+                    'width': 'calc(100% - 51px)',
+                    'transition': '500ms',
+                    'left': '51px'
+                });
             }
         }
 

@@ -52,6 +52,6 @@
         width: 51px;
     }
     .navbar-init .nav-item-text {
-        display: none;
+        opacity: 1;
     }
 }

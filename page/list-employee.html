@@ -6,16 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh mục nhân viên</title>
-    <link rel="stylesheet" href="../css/common/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/common/jquery-ui.css">
-    <link rel="stylesheet" href="../css/common/common.css">
-    <link rel="stylesheet" href="../css/common/header.css">
-    <link rel="stylesheet" href="../css/common/navbar.css">
-    <link rel="stylesheet" href="../lib/font/fontawesome-5.15.1/css/all.min.css">
-    <link rel="stylesheet" href="../css/common/content.css">
-    <link rel="stylesheet" href="../css/page/employee.css">
-    <link rel="stylesheet" href="../css/common/grid.css">
-    <link rel="stylesheet" href="../css/page/add-employee.css">
+    <link rel="stylesheet" href="../css/common/bootstrap.min.css?v=1.1">
+    <link rel="stylesheet" href="../css/common/jquery-ui.css?v=1.1">
+    <link rel="stylesheet" href="../lib/font/fontawesome-5.15.1/css/all.min.css?v=1.1">
+    <link rel="stylesheet" href="../css/common/common.css?v=1.1">
+    <link rel="stylesheet" href="../css/common/header.css?v=1.1">
+    <link rel="stylesheet" href="../css/common/navbar.css?v=1.1">
+    <link rel="stylesheet" href="../css/common/grid.css?v=1.1">
+    <link rel="stylesheet" href="../css/common/content.css?v=1.1">
+    <link rel="stylesheet" href="../css/page/employee.css?v=1.1">
+    <link rel="stylesheet" href="../css/page/add-employee.css?v=1.1">
 
 </head>
 
@@ -25,7 +25,7 @@
         <div class="top-head">
             <!-- logo -->
             <div class="logo-site">
-                <div class="toggle-icon" data-toggle="tooltip" data-placement="bottom" title="Menu"></div>
+                <div class="toggle-icon" data-toggle="tooltip" data-placement="bottom" title="Menu" tabindex="0"></div>
                 <div class="cukcuk-logo" data-toggle="tooltip" data-placement="bottom" title="Phần mềm quản lý nhà hàng"></div>
             </div>
             <!-- company -->
@@ -108,7 +108,7 @@
                     Danh sách nhân viên
                 </div>
                 <div class="content-feature ">
-                    <button class="btn-add-emp" data-toggle="tooltip" data-placement="bottom" title="Thêm nhân viên">
+                    <button class="btn-add-emp" data-toggle="tooltip" data-placement="bottom" data-triggle="hover" title="Thêm nhân viên">
                         <i class="fas fa-user-plus"></i>
                         <span style="color: white;">Thêm nhân viên</span>
                     </button>
@@ -125,7 +125,7 @@
                         </div>
                         <!-- Find by department -->
                         <div class="col-3 find-department find-select">
-                            <input class="select" id="department" readonly="true" data-toggle="tooltip" data-placement="top" title="Tùy chọn phòng ban" data-triggle="hover" value="Tất cả phòng ban">
+                            <input class="select" id="department" readonly="true" data-toggle="tooltip" data-placement="top" title="Tùy chọn phòng ban" data-triggle="hover" rel="popover" value="Tất cả phòng ban">
                             <div class="xselect"><i class="fas fa-times"></i></div>
                             <!-- Option department -->
                             <div class="all-department select-option">
@@ -164,16 +164,16 @@
                 <table id="table">
                     <thead>
                         <tr>
-                            <th>Mã nhân viên</th>
-                            <th>Họ và tên</th>
-                            <th>Giới tính</th>
-                            <th>Ngày sinh</th>
-                            <th>Điện thoại</th>
-                            <th>Email</th>
-                            <th>Chức vụ</th>
-                            <th>Phòng ban</th>
-                            <th>Mức lương cơ bản</th>
-                            <th>Tình thạng</th>
+                            <th fieldName="code">Mã nhân viên</th>
+                            <th fieldName="fullName">Họ và tên</th>
+                            <th fieldName="genderName">Giới tính</th>
+                            <th fieldName="dateOfBirth" style="text-align: center;">Ngày sinh</th>
+                            <th fieldName="phoneNumber">Điện thoại</th>
+                            <th fieldName="email">Email</th>
+                            <th fieldName="positionName">Chức vụ</th>
+                            <th fieldName="departmentName">Phòng ban</th>
+                            <th fieldName="salary" style="text-align: end;">Mức lương cơ bản</th>
+                            <th fieldName="workStatus">Tình trạng</th>
                         </tr>
                     </thead>
                     <!-- </table>
@@ -201,7 +201,7 @@
             <div class="add-emp ui-widget-content" id="scroll-thumb">
                 <div class="container">
                     <div class="row">
-                        <h4 class="col-10">THÔNG TIN NHÂN VIÊN</h4>
+                        <h5 class="col-10">THÔNG TIN NHÂN VIÊN</h5>
                         <div class="col-2 xpop">
                             <button class="btn-close-add"><img src="../lib/icon/x.svg" alt=""></button>
                         </div>
@@ -220,60 +220,60 @@
                                 </div>
                                 <div class="line"></div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput  ">
                                         <p>Mã nhân viên (<span>*</span>)</p>
-                                        <input type="text" name="code" id="code" tabindex="0">
+                                        <input type="text" fieldName="EmployeeCode" name="code" id="code">
                                     </div>
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput  ">
                                         <p>Họ và tên (<span>*</span>)</p>
-                                        <input type="text" name="full_name" id="full_name" tabindex="1">
+                                        <input type="text" fieldName="FullName" name="full_name" id="full_name">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput  ">
                                         <p>Ngày sinh</p>
-                                        <input type="date" name="birth" id="birth" tabindex="2">
+                                        <input type="date" fieldName="DateOfBirth" name="birth" id="birth">
                                     </div>
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput">
                                         <p>Giới tính</p>
-                                        <div class="find-select find-gender">
-                                            <input name="" id="gender" class="gender infoinput select form-group" readonly="true" tabindex="3" value="male" name="gender">
+                                        <div class="find-select find-gender info">
+                                            <input name="" fieldName="GenderName" id="gender" class="gender infoinput select" readonly="true" value="Nam" name="gender">
                                             <div class="select-option all-gender">
-                                                <div id="male">Nam</div>
-                                                <div id="female">Nữ</div>
-                                                <div id="other">Khác</div>
+                                                <div id="male" class="genders">Nam</div>
+                                                <div id="female" class="genders">Nữ</div>
+                                                <div id="other" class="genders">Khác</div>
                                             </div>
-                                            <div class="div-arrow arrow-department" id="findbygender">
-                                                <i class="fas fa-chevron-down arrow department-down"></i>
-                                                <i class="fas fa-chevron-up arrow department-up" style="font-size: 0;"></i>
+                                            <div class="div-arrow arrow-info" id="findbygender">
+                                                <i class="fas fa-chevron-down arrow"></i>
+                                                <i class="fas fa-chevron-up arrow" style="font-size: 0;"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput">
                                         <p>Số CMTND/ Căn cước (<span>*</span>)</p>
-                                        <input type="number" name="identity" id="identity">
+                                        <input type="number" fieldName="IdentityNumber" name="identity" id="identity">
                                     </div>
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput ">
                                         <p>Ngày cấp</p>
-                                        <input type="date" name="date_identity" id="date_identity">
+                                        <input type="date" fieldName="IdentityDate" name="date_identity" id="date_identity">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput  ">
                                         <p>Nơi cấp</p>
-                                        <input type="text" name="address_identity" id="address_identity">
+                                        <input type="text" fieldName="IdentityPlace" name="address_identity" id="address_identity">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput  ">
                                         <p>Email (<span>*</span>)</p>
-                                        <input type="email" name="email" id="email">
+                                        <input type="email" fieldName="Email" name="email" id="email">
                                     </div>
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput  ">
                                         <p>Số điện thoại (<span>*</span>)</p>
-                                        <input type="tel" name="tel" id="tel">
+                                        <input type="tel" fieldName="PhoneNumber" name="tel" id="tel">
                                     </div>
                                 </div>
                             </div>
@@ -284,45 +284,78 @@
                                 </div>
                                 <div class="line"></div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput  ">
                                         <p>Vị trí</p>
-                                        <select name="position" id="position" class="job infoinput  form-group" value="director">
+                                        <!-- <select name="position" id="position" class="job infoinput  " value="director">
                                             <option value="director" >Giám đốc</option>
                                             <option value="employee">Nhân viên</option>
-                                        </select>
+                                        </select> -->
+                                        <div class="find-select find-position info">
+                                            <input name="" fieldName="PositionNmae" id="position" class="position infoinput select" readonly="true" value="Giám đốc" name="">
+                                            <div class="select-option all-position">
+                                                <div id="" class="positions">Giám đốc</div>
+                                                <div id="" class="positions">Nhân viên</div>
+                                            </div>
+                                            <div class="div-arrow arrow-info" id="findbyposition">
+                                                <i class="fas fa-chevron-down arrow"></i>
+                                                <i class="fas fa-chevron-up arrow" style="font-size: 0;"></i>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput  ">
                                         <p>Phòng ban</p>
-                                        <select name="department" id="department" class="department infoinput  form-group" value="manage-em">
-                                            <option value="manage-em" >Phòng nhân sự</option>
-                                            <option value="manage-ac">Phòng kế toán</option>
-                                        </select>
+                                        <!-- <select name="position" id="position" class="job infoinput  " value="director">
+                                            <option value="director" >Giám đốc</option>
+                                            <option value="employee">Nhân viên</option>
+                                        </select> -->
+                                        <div class="find-select find-formdepartment info">
+                                            <input name="" fieldName="DepartmentName" id="formdepartment" class="formdepartment infoinput select" readonly="true" value="Phòng nhân sự" name="">
+                                            <div class="select-option all-formdepartment">
+                                                <div id="" class="formdepartments">Phòng nhân sự</div>
+                                                <div id="" class="formdepartments">Phòng kế toán</div>
+                                            </div>
+                                            <div class="div-arrow arrow-info" id="findbyformdepartment">
+                                                <i class="fas fa-chevron-down arrow"></i>
+                                                <i class="fas fa-chevron-up arrow" style="font-size: 0;"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput  ">
                                         <p>Mã số thuê cá nhân</p>
-                                        <input type="number" name="tax" id="tax">
+                                        <input type="number" field="PersonalTaxCode" name="tax" id="tax">
                                     </div>
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput  ">
                                         <p>Mức lương cơ bản</p>
                                         <div class="salary">
-                                            <input type="number" emp="salary" id="salary">
+                                            <input type="number" fieldName="Salary" emp="salary" id="salary">
                                             <p><i>(VND)</i></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput  ">
                                         <p>Ngày gia nhập công ty</p>
-                                        <input type="date" name="date_create" id="date_create">
+                                        <input type="date" fieldName="JoinDate" name="date_create" id="date_create">
                                     </div>
-                                    <div class="col-6 infoinput  form-group">
+                                    <div class="col-6 infoinput  ">
                                         <p>Tình trạng công việc</p>
-                                        <select name="status" id="status" class="status infoinput  form-group" value="active">
+                                        <!-- <select name="status" id="status" class="status infoinput  " value="active">
                                             <option value="active" >Đang làm việc</option>
                                             <option value="inactive">Đã thôi việc</option>
-                                        </select>
+                                        </select> -->
+                                        <div class="find-select find-status info">
+                                            <input name="" fieldName="WorkStatus" id="status" class="status infoinput select" readonly="true" value="Đang làm việc" name="">
+                                            <div class="select-option all-status">
+                                                <div id="" class="statuss">Đang làm việc</div>
+                                                <div id="" class="statuss">Đã thôi việc</div>
+                                            </div>
+                                            <div class="div-arrow arrow-info" id="findbystatus">
+                                                <i class="fas fa-chevron-down arrow"></i>
+                                                <i class="fas fa-chevron-up arrow" style="font-size: 0;"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -332,8 +365,8 @@
                 <!-- button -->
                 <div class="cancel-save">
                     <div class="container">
-                        <button class="cancel">Hủy</button>
-                        <button class="save">
+                        <button class="cancel" tabindex="16">Hủy</button>
+                        <button class="save" tabindex="17">
                                 <i class="far fa-save"></i>
                                 Lưu
                             </button>
@@ -346,16 +379,18 @@
 </body>
 
 </html>
-<script src='../js/common/jquery-3.6.0.min.js'></script>
-<script src='../js/common/ajax.jquery.min.js'></script>
-<script src="../js/common/jquery-ui.js"></script>
-<script src="../js/common/popper.min.js"></script>
-<script src="../js/common/bootstrap.min.js"></script>
-<script src="../js/common/common.js"></script>
-<script src="../js/page/base.js"></script>
-<script src='../js/page/employee.js'></script>
-<script src='../js/common/header.js'></script>
-<script src='../js/common/navbar.js'></script>
+<script src='../js/lib/jquery-3.6.0.min.js?v=1.1'></script>
+<script src='../js/lib/ajax.jquery.min.js?v=1.1'></script>
+<script src="../js/lib/jquery.validate.min.js"></script>
+<script src="../js/lib/jquery-ui.js?v=1.1"></script>
+<script src="../js/lib/popper.min.js?v=1.1"></script>
+<script src="../js/lib/bootstrap.min.js?v=1.1"></script>
+<script src="../js/common/common.js?v=1.1"></script>
+<script src='../js/common/header.js?v=1.1'></script>
+<script src='../js/common/navbar.js?v=1.1'></script>
+<script src="../js/page/base.js?v=1.1"></script>
+<script src='../js/page/employee.js?v=1.1'></script>
+<script src='../js/page/form-add.js'></script>
 <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip();

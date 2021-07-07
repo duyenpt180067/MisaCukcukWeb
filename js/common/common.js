@@ -3,16 +3,25 @@ $('.reload').on('click', function() {
     location.reload();
 })
 
+$('*').click(function() {
+    $('*').tooltip('hide');
+})
+
 /**------------------------
  * Show option to select
  * Author: PTDuyen
  */
 function showOption(select_option, _function) {
     var _option = $(select_option);
-    $('select-option').slideUp();
-    _option.slideDown();
-    _option.next().children('.fa-chevron-down').css('font-size', '0');
-    _option.next().children('.fa-chevron-up').css('font-size', '12px');
+    $('.select-option').slideUp('fast');
+    _option.slideDown('fast');
+    _option.siblings('.div-arrow').children('.fa-chevron-down').css('font-size', '0');
+    _option.siblings('.div-arrow').children('.fa-chevron-up').css('font-size', '12px');
+    // _option.siblings('.div-arrow').css({
+    //     'background-color': '#bbb',
+    //     'border-right': '1px solid #01b075'
+    // });
+    _option.parent().css('border', '1px solid #01b075');
     _function();
 }
 
@@ -22,9 +31,14 @@ function showOption(select_option, _function) {
  */
 function hideOption(select_option, _function) {
     var _option = $(select_option);
-    _option.slideUp();
-    _option.next().children().first().css('font-size', '12px');
-    _option.next().children().last().css('font-size', '0');
+    _option.slideUp('fast');
+    _option.siblings('.div-arrow').children('.fa-chevron-up').css('font-size', '0');
+    _option.siblings('.div-arrow').children('.fa-chevron-down').css('font-size', '12px');
+    // _option.siblings('.div-arrow').css({
+    //     'background-color': '#fff',
+    //     'border-right': '1px solid #bbb'
+    // });
+    _option.parent().css('border', '1px solid #bbb');
     _function();
 }
 
@@ -44,7 +58,7 @@ function chooseOption(id_select, name_option) {
         $(this).children().css('visibility', 'visible');
         $(id_select).val($(this).text());
         $(id_select).next().css('visibility', 'visible');
-        hideOption(select_option, function() {})
+        hideOption('.select-option', function() {})
     })
 }
 
@@ -55,7 +69,7 @@ function chooseOption(id_select, name_option) {
 function clickOutElement(_selector, _function) {
     $(document).click(function(event) {
         var $target = $(event.target);
-        if (!$target.closest(_selector).length &&
+        if (!$target.closest(_selector).length && !$target.closest($(_selector).children()).length &&
             $(_selector).is(":visible")) {
             _function();
         }
@@ -75,6 +89,43 @@ function delOption(id_select, defaultValue) {
         $(id_select).siblings('.select-option').find('i').css('visibility', 'hidden');
     })
 }
+
+/**-------------------------
+ * Load data to table
+ * Author: PTDuyen
+ * Create 7/7/2021
+ */
+function loadTable(listObj) {
+    $.each(listObj, function(index, obj) {
+        // get element of th
+        var thData = $('table thead tr th');
+        var tr = $(`<tr></tr>`);
+        // map td with th 
+        $.each(thData, function(index, _item) {
+
+            var fieldName = $(_item).attr('fieldName');
+            var value = obj[fieldName]
+
+            if (fieldName.includes("date")) {
+                var td = $(`<td style="text-align: center;"></td>`);
+                td.append(value);
+            } else if (fieldName == "salary") {
+                var td = $(`<td style="text-align: end;"></td>`);
+                td.append(value);
+            } else {
+                var td = $(`<td></td>`);
+                td.append(value);
+            }
+            tr.append(td);
+            $("tbody").append(tr);
+        })
+    })
+}
+
+/**
+ * Double Click to show data detail
+ * Author: PTDuyen 
+ */
 
 //To move the add-form
 $(document).ready(function() {

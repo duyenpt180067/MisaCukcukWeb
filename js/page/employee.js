@@ -1,43 +1,34 @@
 var defaultDepartment = $("#department").val();
 var defaultJob = $("#job").val();
+var listEmployee = [];
+var _urlGetAll = "http://cukcuk.manhnv.net/v1/Employees";
+var _urlNewCode = "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode";
+var newCode;
+
 $(document).ready(function() {
-    //Load data from API to table employee
-    loadData();
-    // validate form add emp
-    // $('#formAdd').validate({
-    //     rules: {
-    //         code: "required",
-    //         full_name: "required",
-    //         email: {
-    //             required: true,
-    //             email: true
-    //         },
-    //         tel: "required"
-    //     },
-    //     messages: {
-    //         code: "Vui lòng nhập mã nhân viên",
-    //         full_name: "Vui lòng nhập họ tên nhân viên",
-    //         email: {
-    //             required: "Vui lòng nhập email",
-    //             email: "Vui lòng nhập đúng định dạng email"
-    //         },
-    //         tel: "Vui lòng nhập số điện thoại nhân viên"
-    //     }
+    //Take data from API to table employee
+    let employee = new Employee();
+    employee.loadEmployee();
+
+    // Take data from url Employee new code
+
+    // loadData(_urlNewCode, function(code) {
+    //     newCode = code;
     // })
 
+    // css when dblclick tr
     $('#table-body').on('dblclick', 'tr', function() {
         $(this).siblings().removeClass("choose-option");
         $(this).addClass("choose-option");
     })
 
-    clickOutElement('#table-tbody tr', function() {
-        $(this).removeClass("choose-option");
-    })
-
     // show form add employee
     $('.btn-add-emp').on("click", function() {
         $('.add-item').css('display', 'flex');
-        $('.add-item form #code').val('NV-' + parseInt(findMaxCode() + 1));
+        $('.add-item form #code').val('NV-' + newCode);
+        $('#code').focus();
+        $('#code').addClass('inputfocus');
+        setTabIndex();
     });
     // close form add-emp
     $('.btn-close-add').on("click", function() {
@@ -61,24 +52,27 @@ $(document).ready(function() {
         chooseOption('#department', '.departments');
         if (checkDepartment == true) {
             showOption('.all-department', function() {
-                $('.arrow-department').css('background-color', '#bbb');
-                $('#findbydepartment').parent().css('border', '1px solid #01b075');
-                $('#findbydepartment').css('border-right', '1px solid #01b075');
+                $('.all-department').siblings('.div-arrow').css({
+                    'background-color': '#bbb',
+                    'border-right': '1px solid #01b075'
+                });
             });
         }
         if (checkDepartment == false) {
             hideOption('.all-department', function() {
-                $('.arrow-department').css('background-color', '#bbb');
-                $('#findbydepartment').parent().css('border', '1px solid #bbb');
-                $('#findbydepartment').css('border-right', '1px solid #bbb');
+                $('.all-department').siblings('.div-arrow').css({
+                    'background-color': '#fff',
+                    'border-right': '1px solid #bbb'
+                });
             });
         }
         clickOutElement('#findbydepartment, #department', function() {
             checkDepartment = false;
             hideOption('.all-department', function() {
-                $('.arrow-department').css('background-color', '#fff');
-                $('#findbydepartment').parent().css('border', '1px solid #bbb');
-                $('#findbydepartment').css('border-right', '1px solid #bbb');
+                $('.all-department').siblings('.div-arrow').css({
+                    'background-color': '#fff',
+                    'border-right': '1px solid #bbb'
+                });
             })
         });
         delOption('#department', defaultDepartment);
@@ -92,24 +86,27 @@ $(document).ready(function() {
         chooseOption('#job', '.jobs')
         if (checkJob == true) {
             showOption('.all-job', function() {
-                $('.arrow-job').css('background-color', '#bbb');
-                $('#findbyjob').parent().css('border', '1px solid #01b075');
-                $('#findbyjob').css('border-right', '1px solid #01b075');
+                $('.all-job').siblings('.div-arrow').css({
+                    'background-color': '#bbb',
+                    'border-right': '1px solid #01b075'
+                });
             });
         }
         if (checkJob == false) {
             hideOption('.all-job', function() {
-                $('.arrow-job').css('background-color', '#bbb');
-                $('#findbyjob').parent().css('border', '1px solid #bbb');
-                $('#findbyjob').css('border-right', '1px solid #bbb');
+                $('.all-job').siblings('.div-arrow').css({
+                    'background-color': '#fff',
+                    'border-right': '1px solid #bbb'
+                });
             });
         }
         clickOutElement('#findbyjob , #job', function() {
             checkJob = false;
             hideOption('.all-job', function() {
-                $('.arrow-job').css('background-color', '#fff');
-                $('#findbyjob').parent().css('border', '1px solid #bbb');
-                $('#findbyjob').css('border-right', '1px solid #bbb');
+                $('.all-job').siblings('.div-arrow').css({
+                    'background-color': '#fff',
+                    'border-right': '1px solid #bbb'
+                });
             })
         });
         delOption('#job', defaultJob);
@@ -125,7 +122,6 @@ function saveEmployee() {
         "createdBy": "string",
         "modifiedDate": date,
         "modifiedBy": "string",
-        "employeeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
         "employeeCode": $('#code').val(),
         "firstName": "string",
         "lastName": "string",
@@ -174,3 +170,79 @@ function saveEmployee() {
 $('.save').on('click', function() {
     saveEmployee();
 })
+
+
+// /** Find the max code of employees
+//  *  Author: PTDuyen
+//  */
+// function findMaxCode() {
+//     console.log(listEmployee);
+//     let max_code = 0;
+//     for (let i = 0; i < listEmployee.length; i++) {
+//         if (parseInt(listEmployee[i].code.substr(3)) > max_code) {
+//             max_code = parseInt(listEmployee[i].code.substr(3));
+//         }
+//     }
+//     return max_code;
+// }
+
+class Employee {
+    constructor() {
+        this.code;
+        this.fullName;
+        this.genderName;
+        this.dateOfBirth;
+        this.phoneNumber;
+        this.email;
+        this.positionName;
+        this.departmentName;
+        this.salary;
+        this.workStatus;
+    }
+
+    /**
+     * Format data
+     * Author: PTDuyen
+     * Create: 7/7/2021
+     */
+    formatData(emp) {
+        let e = new Employee();
+        e.code = (emp.EmployeeCode) ? emp.EmployeeCode : 'Không xác định';
+        e.fullName = (emp.FullName) ? emp.FullName : 'Không xác định';
+        e.genderName = (emp.GenderName) ? emp.GenderName : 'Khác';
+        //format date
+        e.dateOfBirth = (emp.DateOfBirth) ? emp.DateOfBirth.substr(0, 10) : "";
+        e.phoneNumber = (emp.PhoneNumber) ? emp.PhoneNumber : 'Không xác định';
+        e.email = (emp.Email) ? emp.Email : 'Không xác định';
+        e.positionName = (emp.PositionName) ? emp.PositionName : 'Không xác định';
+        e.departmentName = (emp.DepartmentName) ? emp.DepartmentName : 'Không xác định';
+        //format salary
+        e.salary = (emp.Salary) ? parseFloat(emp.Salary, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString() : 'Không xác định';
+        e.workStatus = (emp.WorkStatus) ? emp.WorkStatus : 'Không xác định';
+        return e;
+    }
+
+    /**
+     * Load employee to table
+     * Author: PTDuyen
+     * Create: 7/7/2021
+     */
+    loadEmployee() {
+        let me = this;
+        let list = [];
+        loadData(_urlGetAll, function(listEmp) {
+            $.each(listEmp, function(index, _emp) {
+                list.push(me.formatData(_emp));
+            })
+            loadTable(list);
+        })
+    }
+
+    // /**
+    //  * Take new employee code
+    //  * Author: PTDuyen
+    //  * Create: 7/7/2021
+    //  */
+    // loadNewCode() {
+    // }
+}
