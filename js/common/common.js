@@ -3,9 +3,9 @@ $('.reload').on('click', function() {
     location.reload();
 })
 
-$('*').click(function() {
-    $('*').tooltip('hide');
-})
+// $('*').click(function() {
+//     $('*').tooltip('hide');
+// })
 
 /**------------------------
  * Show option to select
@@ -13,8 +13,8 @@ $('*').click(function() {
  */
 function showOption(select_option, _function) {
     var _option = $(select_option);
-    $('.select-option').slideUp('fast');
-    _option.slideDown('fast');
+    $('.select-option').slideUp(300);
+    _option.slideDown(300);
     _option.siblings('.div-arrow').children('.fa-chevron-down').css('font-size', '0');
     _option.siblings('.div-arrow').children('.fa-chevron-up').css('font-size', '12px');
     // _option.siblings('.div-arrow').css({
@@ -31,7 +31,7 @@ function showOption(select_option, _function) {
  */
 function hideOption(select_option, _function) {
     var _option = $(select_option);
-    _option.slideUp('fast');
+    _option.slideUp(300);
     _option.siblings('.div-arrow').children('.fa-chevron-up').css('font-size', '0');
     _option.siblings('.div-arrow').children('.fa-chevron-down').css('font-size', '12px');
     // _option.siblings('.div-arrow').css({
@@ -61,6 +61,21 @@ function chooseOption(id_select, name_option) {
         hideOption('.select-option', function() {})
     })
 }
+
+// /**
+//  * Check value input to show x 
+//  * Author: PTDuyen
+//  * Create: 8/7/2021
+//  */
+// function fillInput(_selector, _function) {
+//     console.log($(_selector).val() != null)
+//     if ($(_selector).val() != undefined) {
+//         $(_selector).siblings(".xselect").css('visibility', 'visible');
+//         delOption(_selector, undefined);
+//     }else{
+//         _function();
+//     }
+// }
 
 /**------------------------
  * Click out the element having selector is _selector and do the _function
@@ -123,9 +138,69 @@ function loadTable(listObj) {
 }
 
 /**
+ * Validate Form 
+ * Author: PTDuyen
+ * Create: 8/7/2021
+ */
+function validateForm() {
+    var formInput = $('form div input');
+    var email = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    var phone = /^\d{10}$/;
+
+    $.each(formInput, function(index, _input) {
+        // if ($(_input).attr('type') == "number") {
+        //     $(_input).addEventListener("keypress", function(evt) {
+        //         if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+        //             // 0 for null values
+        //             // 8 for backspace 
+        //             // 48-57 for 0-9 numbers
+        //             evt.preventDefault();
+        //         }
+        //     });
+        // }
+        $(_input).on('focus', function() {
+            // if ($(_input).parent().attr('class', 'find-select')) {
+            //     $(_input).parent().addClass('input-focus');
+            // } else
+        })
+        if ($(_input).attr('validate')) {
+            var validate = $(_input).attr('validate');
+            $(_input).on('focus', function() {
+                if ($(_input).val() != undefined) {
+                    $(_input).siblings(".xselect").css('visibility', 'visible');
+                    delOption(_input, undefined);
+                    if ($(_input).attr('fieldName') == "Email") {
+                        if (email.test($(_input).val()) == false) {
+                            console.log("ok")
+                            $(_input).attr('data-original-title', 'Vui lòng nhập đúng định dạng email!');
+                            $(_input).tooltip('show');
+                        } else {
+                            $(_input).attr('data-original-title', null);
+                            $(_input).tooltip('hide');
+                        }
+                    } else if ($(_input).attr('fieldName') == "PhoneNumber") {
+                        if (!phone.test($(_input).val())) {
+                            $(_input).attr('data-original-title', "Vui lòng nhập đúng định dạng số điện thoại");
+                            $(_input).tooltip('show');
+                        } else {
+                            $(_input).tooltip('hide');
+                        }
+                    }
+                } else {
+
+                }
+            })
+            $(_input).attr('title')
+            console.log(validate);
+        }
+    })
+}
+
+/**
  * Double Click to show data detail
  * Author: PTDuyen 
  */
+function loadDetail() {}
 
 //To move the add-form
 $(document).ready(function() {

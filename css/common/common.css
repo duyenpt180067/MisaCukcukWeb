@@ -149,9 +149,17 @@ p {
     transition: 100ms;
 }
 
-
-/* input[type=search]::-webkit-search-cancel-button {
-    width: 15px;
-    height: 15px;
-    background-color: #019160;
-} */
+.xselect {
+    position: absolute;
+    background-color: #E9EBEE;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* top: 12px;
+    right: 45px; */
+    font-size: 10px;
+    visibility: hidden;
+}

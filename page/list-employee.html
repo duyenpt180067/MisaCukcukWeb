@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh mục nhân viên</title>
-    <link rel="stylesheet" href="../css/common/bootstrap.min.css?v=1.1">
-    <link rel="stylesheet" href="../css/common/jquery-ui.css?v=1.1">
+    <link rel="stylesheet" href="../css/lib/bootstrap.min.css?v=1.1">
+    <link rel="stylesheet" href="../css/lib/jquery-ui.css?v=1.1">
     <link rel="stylesheet" href="../lib/font/fontawesome-5.15.1/css/all.min.css?v=1.1">
     <link rel="stylesheet" href="../css/common/common.css?v=1.1">
     <link rel="stylesheet" href="../css/common/header.css?v=1.1">
@@ -220,24 +220,28 @@
                                 </div>
                                 <div class="line"></div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  ">
+                                    <div class="col-6 infoinput">
                                         <p>Mã nhân viên (<span>*</span>)</p>
-                                        <input type="text" fieldName="EmployeeCode" name="code" id="code">
+                                        <input type="text" fieldName="EmployeeCode" validate="mã nhân viên" name="code" id="code" data-toggle="tooltip" data-placement="top" title="">
+                                        <div class="xselect"><i class="fas fa-times"></i></div>
                                     </div>
-                                    <div class="col-6 infoinput  ">
+                                    <div class="col-6 infoinput">
                                         <p>Họ và tên (<span>*</span>)</p>
-                                        <input type="text" fieldName="FullName" name="full_name" id="full_name">
+                                        <input type="text" fieldName="FullName" name="full_name" validate="họ và tên nhân viên" id="full_name" data-toggle="tooltip" data-placement="top">
+                                        <div class="xselect"><i class="fas fa-times"></i></div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  ">
+                                    <div class="col-6 infoinput">
                                         <p>Ngày sinh</p>
                                         <input type="date" fieldName="DateOfBirth" name="birth" id="birth">
+                                        <div class="xselect"><i class="fas fa-times"></i></div>
                                     </div>
                                     <div class="col-6 infoinput">
                                         <p>Giới tính</p>
                                         <div class="find-select find-gender info">
-                                            <input name="" fieldName="GenderName" id="gender" class="gender infoinput select" readonly="true" value="Nam" name="gender">
+                                            <input name="" fieldName="GenderName" id="gender" class="gender infoinput select" readonly="true" placeholder="Chọn giới tính" name="gender">
+                                            <div class="xselect"><i class="fas fa-times"></i></div>
                                             <div class="select-option all-gender">
                                                 <div id="male" class="genders">Nam</div>
                                                 <div id="female" class="genders">Nữ</div>
@@ -253,27 +257,32 @@
                                 <div class="row">
                                     <div class="col-6 infoinput">
                                         <p>Số CMTND/ Căn cước (<span>*</span>)</p>
-                                        <input type="number" fieldName="IdentityNumber" name="identity" id="identity">
+                                        <input type="number" fieldName="IdentityNumber" validate="số chứng minh thư nhân dân / Thẻ căn cước công dân" name="identity" id="identity" data-toggle="tooltip" data-placement="top">
+                                        <div class="xselect"><i class="fas fa-times"></i></div>
                                     </div>
                                     <div class="col-6 infoinput ">
                                         <p>Ngày cấp</p>
                                         <input type="date" fieldName="IdentityDate" name="date_identity" id="date_identity">
+                                        <div class="xselect"><i class="fas fa-times"></i></div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  ">
+                                    <div class="col-6 infoinput">
                                         <p>Nơi cấp</p>
                                         <input type="text" fieldName="IdentityPlace" name="address_identity" id="address_identity">
+                                        <div class="xselect"><i class="fas fa-times"></i></div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  ">
+                                    <div class="col-6 infoinput">
                                         <p>Email (<span>*</span>)</p>
-                                        <input type="email" fieldName="Email" name="email" id="email">
+                                        <input type="email" fieldName="Email" validate="email của nhân viên" name="email" id="email" data-toggle="tooltip" data-placement="top" data-toggle="tooltip" data-placement="top" title="">
+                                        <div class="xselect"><i class="fas fa-times"></i></div>
                                     </div>
-                                    <div class="col-6 infoinput  ">
+                                    <div class="col-6 infoinput">
                                         <p>Số điện thoại (<span>*</span>)</p>
-                                        <input type="tel" fieldName="PhoneNumber" name="tel" id="tel">
+                                        <input type="tel" fieldName="PhoneNumber" validate="PhoneNumber" name="tel" id="tel" data-toggle="tooltip" data-placement="top">
+                                        <div class="xselect"><i class="fas fa-times"></i></div>
                                     </div>
                                 </div>
                             </div>
@@ -284,14 +293,15 @@
                                 </div>
                                 <div class="line"></div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  ">
+                                    <div class="col-6 infoinput">
                                         <p>Vị trí</p>
-                                        <!-- <select name="position" id="position" class="job infoinput  " value="director">
+                                        <!-- <select name="position" id="position" class="job infoinput" value="director">
                                             <option value="director" >Giám đốc</option>
                                             <option value="employee">Nhân viên</option>
                                         </select> -->
                                         <div class="find-select find-position info">
-                                            <input name="" fieldName="PositionNmae" id="position" class="position infoinput select" readonly="true" value="Giám đốc" name="">
+                                            <input name="" fieldName="PositionNmae" id="position" class="position infoinput select" readonly="true" placeholder="Chọn vị trí" name="">
+                                            <div class="xselect"><i class="fas fa-times"></i></div>
                                             <div class="select-option all-position">
                                                 <div id="" class="positions">Giám đốc</div>
                                                 <div id="" class="positions">Nhân viên</div>
@@ -302,14 +312,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 infoinput  ">
+                                    <div class="col-6 infoinput">
                                         <p>Phòng ban</p>
-                                        <!-- <select name="position" id="position" class="job infoinput  " value="director">
+                                        <!-- <select name="position" id="position" class="job infoinput" value="director">
                                             <option value="director" >Giám đốc</option>
                                             <option value="employee">Nhân viên</option>
                                         </select> -->
                                         <div class="find-select find-formdepartment info">
-                                            <input name="" fieldName="DepartmentName" id="formdepartment" class="formdepartment infoinput select" readonly="true" value="Phòng nhân sự" name="">
+                                            <input name="" fieldName="DepartmentName" id="formdepartment" class="formdepartment infoinput select" readonly="true" placeholder="Chọn phòng ban" name="">
+                                            <div class="xselect"><i class="fas fa-times"></i></div>
                                             <div class="select-option all-formdepartment">
                                                 <div id="" class="formdepartments">Phòng nhân sự</div>
                                                 <div id="" class="formdepartments">Phòng kế toán</div>
@@ -322,31 +333,35 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  ">
+                                    <div class="col-6 infoinput">
                                         <p>Mã số thuê cá nhân</p>
                                         <input type="number" field="PersonalTaxCode" name="tax" id="tax">
+                                        <div class="xselect"><i class="fas fa-times"></i></div>
                                     </div>
-                                    <div class="col-6 infoinput  ">
+                                    <div class="col-6 infoinput">
                                         <p>Mức lương cơ bản</p>
                                         <div class="salary">
                                             <input type="number" fieldName="Salary" emp="salary" id="salary">
+                                            <div class="xselect"><i class="fas fa-times"></i></div>
                                             <p><i>(VND)</i></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 infoinput  ">
+                                    <div class="col-6 infoinput">
                                         <p>Ngày gia nhập công ty</p>
                                         <input type="date" fieldName="JoinDate" name="date_create" id="date_create">
+                                        <div class="xselect"><i class="fas fa-times"></i></div>
                                     </div>
-                                    <div class="col-6 infoinput  ">
+                                    <div class="col-6 infoinput">
                                         <p>Tình trạng công việc</p>
-                                        <!-- <select name="status" id="status" class="status infoinput  " value="active">
+                                        <!-- <select name="status" id="status" class="status infoinput" value="active">
                                             <option value="active" >Đang làm việc</option>
                                             <option value="inactive">Đã thôi việc</option>
                                         </select> -->
                                         <div class="find-select find-status info">
-                                            <input name="" fieldName="WorkStatus" id="status" class="status infoinput select" readonly="true" value="Đang làm việc" name="">
+                                            <input name="" fieldName="WorkStatus" id="status" class="status infoinput select" readonly="true" placeholder="Chọn trạng thái làm việc" name="">
+                                            <div class="xselect"><i class="fas fa-times"></i></div>
                                             <div class="select-option all-status">
                                                 <div id="" class="statuss">Đang làm việc</div>
                                                 <div id="" class="statuss">Đã thôi việc</div>
@@ -381,10 +396,10 @@
 </html>
 <script src='../js/lib/jquery-3.6.0.min.js?v=1.1'></script>
 <script src='../js/lib/ajax.jquery.min.js?v=1.1'></script>
-<script src="../js/lib/jquery.validate.min.js"></script>
 <script src="../js/lib/jquery-ui.js?v=1.1"></script>
 <script src="../js/lib/popper.min.js?v=1.1"></script>
 <script src="../js/lib/bootstrap.min.js?v=1.1"></script>
+<script src="../js/lib/jquery.validate.min.js"></script>
 <script src="../js/common/common.js?v=1.1"></script>
 <script src='../js/common/header.js?v=1.1'></script>
 <script src='../js/common/navbar.js?v=1.1'></script>

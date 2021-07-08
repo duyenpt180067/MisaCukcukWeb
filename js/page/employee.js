@@ -27,8 +27,8 @@ $(document).ready(function() {
         $('.add-item').css('display', 'flex');
         $('.add-item form #code').val('NV-' + newCode);
         $('#code').focus();
-        $('#code').addClass('inputfocus');
-        setTabIndex();
+        $('#code').addClass('input-focus');
+        validateForm();
     });
     // close form add-emp
     $('.btn-close-add').on("click", function() {
@@ -110,6 +110,10 @@ $(document).ready(function() {
             })
         });
         delOption('#job', defaultJob);
+    })
+
+    loadData(_urlNewCode, function(code) {
+        newCode = code;
     })
 })
 
@@ -237,12 +241,4 @@ class Employee {
             loadTable(list);
         })
     }
-
-    // /**
-    //  * Take new employee code
-    //  * Author: PTDuyen
-    //  * Create: 7/7/2021
-    //  */
-    // loadNewCode() {
-    // }
 }

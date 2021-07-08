@@ -96,18 +96,8 @@
 }
 
 .content .filter-bar .find-select .xselect {
-    position: absolute;
-    background-color: #E9EBEE;
-    border-radius: 50%;
-    width: 14px;
-    height: 14px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     top: 12px;
     right: 45px;
-    font-size: 10px;
-    visibility: hidden;
 }
 
 .content .filter-bar .find-select .select-option div i {

@@ -1,33 +1,55 @@
-// validate form add emp
-$(document).ready(function() {
-    $("#formAdd").validate({
-        rules: {
-            code: 'required',
-            full_name: 'required',
-            email: {
-                required: true,
-                email: true
-            },
-            tel: 'required'
-        },
-        messages: {
-            code: "Vui lòng nhập mã nhân viên",
-            full_name: "Vui lòng nhập họ tên nhân viên",
-            email: {
-                required: "Vui lòng nhập email",
-                email: "Vui lòng nhập đúng định dạng email"
-            },
-            tel: {
-                required: "Vui lòng nhập số điện thoại nhân viên"
-            }
-        }
-    })
-    $("#code").on('focus', function() {
-        $('#code').addClass('inputfocus');
-        $("#code").valid();
-    })
-    $("#formAdd").valid();
-})
+// // validate form add emp
+// $(document).ready(function() {
+//     $("#formAdd").validate({
+//         onfocusout: false,
+//         rules: {
+//             code: 'required',
+//             full_name: 'required',
+//             email: {
+//                 required: true,
+//                 email: true
+//             },
+//             tel: {
+//                 required: true
+//             }
+//         },
+//         messages: {
+//             code: "Vui lòng nhập mã nhân viên",
+//             full_name: "Vui lòng nhập họ tên nhân viên",
+//             email: {
+//                 required: "Vui lòng nhập email",
+//                 email: "Vui lòng nhập đúng định dạng email"
+//             },
+//             tel: {
+//                 required: "Vui lòng nhập số điện thoại nhân viên"
+//             }
+//         }
+//     })
+//     $("#code").on('focus', function() {
+//         $('#code').addClass('inputfocus');
+//         console.log($("#code").valid());
+//         if ($('#code').valid() == false) {
+//             $('#code').removeClass('inputfocus');
+//             $('#code').addClass('invalid-input');
+//             console.log("ok")
+//         } else {
+//             $('#code').addClass('inputfocus');
+//         }
+//         console.log($("#code").valid());
+//     })
+//     $("#formAdd").valid();
+// })
+
+// var dataInput = $('.infoinput input');
+// $.each(dataInput, function(index, item) {
+//     // console.log($(item));
+//     $(item).focus(function() {
+//         console.log(item)
+//         fillInput(item);
+//     })
+// })
+
+
 
 // js for select gender
 var checkGender = false;
@@ -117,12 +139,10 @@ $('#findbystatus, #status').on('click', function() {
     delOption('#status', null);
 })
 
-// fail
-function setTabIndex() {
-    var inputData = $('infoinput input');
-    $.each(inputData, function(index, _item) {
-        $(_item).attr('tabindex', index);
-        $(_item).addClass('inputfocus');
-        console.log($(_item).html());
-    })
+/**
+ * CSS invalid input
+ * Author: PTDuyen
+ */
+function invalidInput(_selector) {
+    $(_selector).addClass('invalid-input');
 }
