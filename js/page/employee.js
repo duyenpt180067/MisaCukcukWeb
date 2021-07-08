@@ -1,3 +1,5 @@
+import Department from "./department.js";
+
 var defaultDepartment = $("#department").val();
 var defaultJob = $("#job").val();
 var listEmployee = [];
@@ -6,9 +8,24 @@ var _urlNewCode = "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode";
 var newCode;
 
 $(document).ready(function() {
+    //js for btn reload
+    $('.reload').on('click', function() {
+        listEmployee = [];
+        $('tbody').empty();
+        employee.loadEmployee();
+        checkDepartment = false;
+        checkJob = false;
+        $("#department").val(defaultDepartment);
+        $("#job").val(defaultJob);
+        $("#department, #job").siblings('.xselect').css('visibility', 'hidden');
+        $("#department, #job").siblings('.select-option').children().removeClass('choose-option');
+        $("#department, #job").siblings('.select-option').find('i').css('visibility', 'hidden');
+    })
+
     //Take data from API to table employee
     let employee = new Employee();
     employee.loadEmployee();
+    let department = new Department();
 
     // Take data from url Employee new code
 
@@ -49,7 +66,19 @@ $(document).ready(function() {
     $('#findbydepartment, #department').on('click', function() {
         checkDepartment = !checkDepartment;
         checkJob = false;
-        chooseOption('#department', '.departments');
+        chooseOption('#department', '.departments', function(id) {
+            console.log(id);
+            listEmployee = [];
+            $('tbody').empty();
+            loadData(_urlGetAll, function(listEmp) {
+                $.each(listEmp, function(index, _emp) {
+                    if (_emp.DepartmentId === id)
+                        listEmployee.push(employee.formatData(_emp));
+                })
+                loadTable(listEmployee);
+                console.log(listEmployee);
+            })
+        });
         if (checkDepartment == true) {
             showOption('.all-department', function() {
                 $('.all-department').siblings('.div-arrow').css({
@@ -117,58 +146,58 @@ $(document).ready(function() {
     })
 })
 
-// save data
-function saveEmployee() {
-    let date = new Date();
-    console.log(date);
-    let employee = {
-        "createdDate": date,
-        "createdBy": "string",
-        "modifiedDate": date,
-        "modifiedBy": "string",
-        "employeeCode": $('#code').val(),
-        "firstName": "string",
-        "lastName": "string",
-        "fullName": $('#full_name').val(),
-        "gender": $('#gender').val(),
-        "dateOfBirth": "2000-07-05T04:00:25.541Z",
-        "phoneNumber": $('#tel').val(),
-        "email": $('#email').val(),
-        "address": "string",
-        "identityNumber": $('#identity').val(),
-        "identityDate": $('#date_identity').val(),
-        "identityPlace": $('#address_identity').val(),
-        "joinDate": date,
-        "martialStatus": 0,
-        "educationalBackground": 0,
-        "qualificationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        "departmentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        "positionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        "workStatus": 0,
-        "personalTaxCode": "string",
-        "salary": 1000,
-        "positionCode": "string",
-        "positionName": $('#position').val(),
-        "departmentCode": "string",
-        "departmentName": $('#department').val(),
-        "qualificationName": "string"
-    };
-    $.ajax({
-        type: "POST",
-        url: "http://cukcuk.manhnv.net/v1/Employees",
-        // crossDomain: 'true',
-        data: employee,
-        processData: false, // tell jQuery not to process the data
-        contentType: false,
-        success: function(data) {
-            loadData();
-            location.reload();
-            console.log(data);
-        },
-        error: function() { alert('Failed!'); },
-        // beforeSend: setHeader
-    })
-}
+// // save data
+// function saveEmployee() {
+//     let date = new Date();
+//     console.log(date);
+//     let employee = {
+//         "createdDate": date,
+//         "createdBy": "string",
+//         "modifiedDate": date,
+//         "modifiedBy": "string",
+//         "employeeCode": $('#code').val(),
+//         "firstName": "string",
+//         "lastName": "string",
+//         "fullName": $('#full_name').val(),
+//         "gender": $('#gender').val(),
+//         "dateOfBirth": "2000-07-05T04:00:25.541Z",
+//         "phoneNumber": $('#tel').val(),
+//         "email": $('#email').val(),
+//         "address": "string",
+//         "identityNumber": $('#identity').val(),
+//         "identityDate": $('#date_identity').val(),
+//         "identityPlace": $('#address_identity').val(),
+//         "joinDate": date,
+//         "martialStatus": 0,
+//         "educationalBackground": 0,
+//         "qualificationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+//         "departmentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+//         "positionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+//         "workStatus": 0,
+//         "personalTaxCode": "string",
+//         "salary": 1000,
+//         "positionCode": "string",
+//         "positionName": $('#position').val(),
+//         "departmentCode": "string",
+//         "departmentName": $('#department').val(),
+//         "qualificationName": "string"
+//     };
+//     $.ajax({
+//         type: "POST",
+//         url: "http://cukcuk.manhnv.net/v1/Employees",
+//         // crossDomain: 'true',
+//         data: employee,
+//         processData: false, // tell jQuery not to process the data
+//         contentType: false,
+//         success: function(data) {
+//             loadData();
+//             location.reload();
+//             console.log(data);
+//         },
+//         error: function() { alert('Failed!'); },
+//         // beforeSend: setHeader
+//     })
+// }
 
 // save data 
 $('.save').on('click', function() {
@@ -190,11 +219,11 @@ $('.save').on('click', function() {
 //     return max_code;
 // }
 
-class Employee {
+export default class Employee {
     constructor() {
-        this.code;
+        this.employeeCode;
         this.fullName;
-        this.genderName;
+        this.gender;
         this.dateOfBirth;
         this.phoneNumber;
         this.email;
@@ -211,11 +240,12 @@ class Employee {
      */
     formatData(emp) {
         let e = new Employee();
-        e.code = (emp.EmployeeCode) ? emp.EmployeeCode : 'Không xác định';
+        e.employeeCode = (emp.EmployeeCode) ? emp.EmployeeCode : 'Không xác định';
         e.fullName = (emp.FullName) ? emp.FullName : 'Không xác định';
-        e.genderName = (emp.GenderName) ? emp.GenderName : 'Khác';
+        e.fullName = (emp.FullName) ? emp.FullName : 'Không xác định';
+        e.gender = (emp.Gender) ? emp.Gender : 'Không xác định';
         //format date
-        e.dateOfBirth = (emp.DateOfBirth) ? emp.DateOfBirth.substr(0, 10) : "";
+        e.dateOfBirth = (emp.DateOfBirth) ? emp.DateOfBirth.substr(0, 10) : ""; // tolocalDateString("en-GB")
         e.phoneNumber = (emp.PhoneNumber) ? emp.PhoneNumber : 'Không xác định';
         e.email = (emp.Email) ? emp.Email : 'Không xác định';
         e.positionName = (emp.PositionName) ? emp.PositionName : 'Không xác định';

@@ -128,11 +128,7 @@
                             <input class="select" id="department" readonly="true" data-toggle="tooltip" data-placement="top" title="Tùy chọn phòng ban" data-triggle="hover" rel="popover" value="Tất cả phòng ban">
                             <div class="xselect"><i class="fas fa-times"></i></div>
                             <!-- Option department -->
-                            <div class="all-department select-option">
-                                <div id="all" class="departments"><i class="fas fa-check"></i>Tất cả phòng ban</div>
-                                <div id="department1" class="departments"><i class="fas fa-check"></i>Phòng nhân sự</div>
-                                <div id="department2" class="departments"><i class="fas fa-check"></i>Phòng đào tạo</div>
-                            </div>
+                            <div class="all-department select-option"></div>
                             <!-- arrow -->
                             <div class="div-arrow arrow-department" id="findbydepartment">
                                 <i class="fas fa-chevron-down arrow department-down"></i>
@@ -143,11 +139,7 @@
                         <div class="col-3 find-job find-select">
                             <input class="select" id="job" readonly="true" data-toggle="tooltip" data-placement="top" title="Tùy chọn vị trí" data-triggle="hover" value="Tất cả vị trí">
                             <div class="xselect"><i class="fas fa-times"></i></div>
-                            <div class="all-job select-option">
-                                <div id="all" class="jobs"><i class="fas fa-check"></i>Tất cả vị trí</div>
-                                <div id="job1" class="jobs"><i class="fas fa-check"></i>Giám đốc</div>
-                                <div id="job2" class="jobs"><i class="fas fa-check"></i>Kế toán</div>
-                            </div>
+                            <div class="all-job select-option"></div>
                             <div class="div-arrow arrow-job" id="findbyjob">
                                 <i class="fas fa-chevron-down arrow job-down"></i>
                                 <i class="fas fa-chevron-up arrow job-up" style="font-size: 0;"></i>
@@ -164,7 +156,7 @@
                 <table id="table">
                     <thead>
                         <tr>
-                            <th fieldName="code">Mã nhân viên</th>
+                            <th fieldName="employeeCode">Mã nhân viên</th>
                             <th fieldName="fullName">Họ và tên</th>
                             <th fieldName="genderName">Giới tính</th>
                             <th fieldName="dateOfBirth" style="text-align: center;">Ngày sinh</th>
@@ -281,7 +273,7 @@
                                     </div>
                                     <div class="col-6 infoinput">
                                         <p>Số điện thoại (<span>*</span>)</p>
-                                        <input type="tel" fieldName="PhoneNumber" validate="PhoneNumber" name="tel" id="tel" data-toggle="tooltip" data-placement="top">
+                                        <input type="tel" fieldName="PhoneNumber" validate="số điện thoại nhân viên" name="tel" id="tel" data-toggle="tooltip" data-placement="top">
                                         <div class="xselect"><i class="fas fa-times"></i></div>
                                     </div>
                                 </div>
@@ -404,8 +396,10 @@
 <script src='../js/common/header.js?v=1.1'></script>
 <script src='../js/common/navbar.js?v=1.1'></script>
 <script src="../js/page/base.js?v=1.1"></script>
-<script src='../js/page/employee.js?v=1.1'></script>
-<script src='../js/page/form-add.js'></script>
+<script src='../js/page/employee.js?v=1.1' type="module"></script>
+<script src='../js/page/form-add.js' type="module"></script>
+<script src="../js/page/department.js" type="module"></script>
+<script src="../js/page/position.js" type="module"></script>
 <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip();

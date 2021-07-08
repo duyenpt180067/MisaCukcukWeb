@@ -49,7 +49,7 @@
 //     })
 // })
 
-
+import Employee from './employee.js'
 
 // js for select gender
 var checkGender = false;
@@ -140,9 +140,11 @@ $('#findbystatus, #status').on('click', function() {
 })
 
 /**
- * CSS invalid input
- * Author: PTDuyen
+ *  Post Employee
+ * Author: PTDuyen(8/7/2021)
  */
-function invalidInput(_selector) {
-    $(_selector).addClass('invalid-input');
+var urlEmp = "http://cukcuk.manhnv.net/v1/Employees";
+
+function postEmployee(_urlEmp) {
+
 }
