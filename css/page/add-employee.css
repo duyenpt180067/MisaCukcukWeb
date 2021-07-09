@@ -108,7 +108,9 @@ span {
 
 .infoinput .xselect {
     right: 43px;
-    top: 39px;
+    top: 35px;
+    width: 20px;
+    height: 20px;
 }
 
 .infoinput .info .arrow-info {

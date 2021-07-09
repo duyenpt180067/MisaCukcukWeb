@@ -3,7 +3,7 @@ import Department from "./department.js";
 var defaultDepartment = $("#department").val();
 var defaultJob = $("#job").val();
 var listEmployee = [];
-var _urlGetAll = "http://cukcuk.manhnv.net/v1/Employees";
+var _urlEmployee = "http://cukcuk.manhnv.net/v1/Employees";
 var _urlNewCode = "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode";
 var newCode;
 
@@ -27,16 +27,22 @@ $(document).ready(function() {
     employee.loadEmployee();
     let department = new Department();
 
-    // Take data from url Employee new code
-
-    // loadData(_urlNewCode, function(code) {
-    //     newCode = code;
-    // })
-
-    // css when dblclick tr
+    // css when dblclick tr and put data
     $('#table-body').on('dblclick', 'tr', function() {
         $(this).siblings().removeClass("choose-option");
         $(this).addClass("choose-option");
+        let obj = $(this).data();
+        loadDataForm(obj, "#formAdd");
+        $('.add-item').css('display', 'flex');
+        $('.save').addClass('update');
+        $('.update').removeClass('save');
+        validateForm();
+        $(".update").on('click', function() {
+            let emp = new Employee();
+            emp.putEmployee(obj.EmployeeId, obj);
+            console.log($(this).data());
+        })
+
     })
 
     // show form add employee
@@ -66,13 +72,13 @@ $(document).ready(function() {
     $('#findbydepartment, #department').on('click', function() {
         checkDepartment = !checkDepartment;
         checkJob = false;
-        chooseOption('#department', '.departments', function(id) {
-            console.log(id);
+        chooseOption('#department', '.departments', function(res) {
+            // console.log(id);
             listEmployee = [];
             $('tbody').empty();
-            loadData(_urlGetAll, function(listEmp) {
+            loadData(_urlEmployee, function(listEmp) {
                 $.each(listEmp, function(index, _emp) {
-                    if (_emp.DepartmentId === id)
+                    if (_emp.DepartmentId === res.DepartmentId)
                         listEmployee.push(employee.formatData(_emp));
                 })
                 loadTable(listEmployee);
@@ -112,7 +118,9 @@ $(document).ready(function() {
     $('#findbyjob , #job').on('click', function() {
         checkJob = !checkJob;
         checkDepartment = false;
-        chooseOption('#job', '.jobs')
+        chooseOption('#job', '.jobs', function(res) {
+            $('#job').data(res);
+        })
         if (checkJob == true) {
             showOption('.all-job', function() {
                 $('.all-job').siblings('.div-arrow').css({
@@ -144,66 +152,13 @@ $(document).ready(function() {
     loadData(_urlNewCode, function(code) {
         newCode = code;
     })
+    $(".save").on('click', function() {
+        let emp = new Employee();
+        // emp = dataForm("#formAdd", emp);
+        // console.log(emp);
+        emp.postEmployee();
+    })
 })
-
-// // save data
-// function saveEmployee() {
-//     let date = new Date();
-//     console.log(date);
-//     let employee = {
-//         "createdDate": date,
-//         "createdBy": "string",
-//         "modifiedDate": date,
-//         "modifiedBy": "string",
-//         "employeeCode": $('#code').val(),
-//         "firstName": "string",
-//         "lastName": "string",
-//         "fullName": $('#full_name').val(),
-//         "gender": $('#gender').val(),
-//         "dateOfBirth": "2000-07-05T04:00:25.541Z",
-//         "phoneNumber": $('#tel').val(),
-//         "email": $('#email').val(),
-//         "address": "string",
-//         "identityNumber": $('#identity').val(),
-//         "identityDate": $('#date_identity').val(),
-//         "identityPlace": $('#address_identity').val(),
-//         "joinDate": date,
-//         "martialStatus": 0,
-//         "educationalBackground": 0,
-//         "qualificationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-//         "departmentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-//         "positionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-//         "workStatus": 0,
-//         "personalTaxCode": "string",
-//         "salary": 1000,
-//         "positionCode": "string",
-//         "positionName": $('#position').val(),
-//         "departmentCode": "string",
-//         "departmentName": $('#department').val(),
-//         "qualificationName": "string"
-//     };
-//     $.ajax({
-//         type: "POST",
-//         url: "http://cukcuk.manhnv.net/v1/Employees",
-//         // crossDomain: 'true',
-//         data: employee,
-//         processData: false, // tell jQuery not to process the data
-//         contentType: false,
-//         success: function(data) {
-//             loadData();
-//             location.reload();
-//             console.log(data);
-//         },
-//         error: function() { alert('Failed!'); },
-//         // beforeSend: setHeader
-//     })
-// }
-
-// save data 
-$('.save').on('click', function() {
-    saveEmployee();
-})
-
 
 // /** Find the max code of employees
 //  *  Author: PTDuyen
@@ -220,17 +175,17 @@ $('.save').on('click', function() {
 // }
 
 export default class Employee {
-    constructor() {
-        this.employeeCode;
-        this.fullName;
-        this.gender;
-        this.dateOfBirth;
-        this.phoneNumber;
-        this.email;
-        this.positionName;
-        this.departmentName;
-        this.salary;
-        this.workStatus;
+    constructor(employeeCode, fullName, gender, dateOfBirth, phoneNumber, email, positionName, departmentName, salary, workStatus) {
+        this.employeeCode = employeeCode;
+        this.fullName = fullName;
+        this.genderName = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.positionName = positionName;
+        this.departmentName = departmentName;
+        this.salary = salary;
+        this.workStatus = workStatus;
     }
 
     /**
@@ -239,21 +194,20 @@ export default class Employee {
      * Create: 7/7/2021
      */
     formatData(emp) {
-        let e = new Employee();
-        e.employeeCode = (emp.EmployeeCode) ? emp.EmployeeCode : 'Không xác định';
-        e.fullName = (emp.FullName) ? emp.FullName : 'Không xác định';
-        e.fullName = (emp.FullName) ? emp.FullName : 'Không xác định';
-        e.gender = (emp.Gender) ? emp.Gender : 'Không xác định';
+        // let e = new Employee();
+        emp.EmployeeCode = (emp.EmployeeCode) ? emp.EmployeeCode : 'Không xác định';
+        emp.FullName = (emp.FullName) ? emp.FullName : 'Không xác định';
+        emp.GenderName = (emp.GenderName) ? emp.GenderName : 'Không xác định';
         //format date
-        e.dateOfBirth = (emp.DateOfBirth) ? emp.DateOfBirth.substr(0, 10) : ""; // tolocalDateString("en-GB")
-        e.phoneNumber = (emp.PhoneNumber) ? emp.PhoneNumber : 'Không xác định';
-        e.email = (emp.Email) ? emp.Email : 'Không xác định';
-        e.positionName = (emp.PositionName) ? emp.PositionName : 'Không xác định';
-        e.departmentName = (emp.DepartmentName) ? emp.DepartmentName : 'Không xác định';
+        emp.DateOfBirth = (emp.DateOfBirth) ? emp.DateOfBirth.substr(0, 10) : ""; // tolocalDateString("en-GB")
+        emp.PhoneNumber = (emp.PhoneNumber) ? emp.PhoneNumber : 'Không xác định';
+        emp.Email = (emp.Email) ? emp.Email : 'Không xác định';
+        emp.PositionName = (emp.PositionName) ? emp.PositionName : 'Không xác định';
+        emp.DepartmentName = (emp.DepartmentName) ? emp.DepartmentName : 'Không xác định';
         //format salary
-        e.salary = (emp.Salary) ? parseFloat(emp.Salary, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString() : 'Không xác định';
-        e.workStatus = (emp.WorkStatus) ? emp.WorkStatus : 'Không xác định';
-        return e;
+        emp.Salary = (emp.Salary) ? parseFloat(emp.Salary, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString() : 'Không xác định';
+        emp.WorkStatus = (emp.WorkStatus) ? emp.WorkStatus : 'Không xác định';
+        return emp;
     }
 
     /**
@@ -264,11 +218,33 @@ export default class Employee {
     loadEmployee() {
         let me = this;
         let list = [];
-        loadData(_urlGetAll, function(listEmp) {
+        loadData(_urlEmployee, function(listEmp) {
             $.each(listEmp, function(index, _emp) {
                 list.push(me.formatData(_emp));
             })
             loadTable(list);
         })
+    }
+
+    /**
+     * Post employee
+     * Author: PTDuyen(8/7/2021)
+     */
+    postEmployee() {
+        let emp = new Employee();
+        emp = dataForm("#formAdd", emp);
+        delete emp.genderName;
+        delete emp.positionName;
+        delete emp.departmentName;
+        console.log(emp);
+        postData(_urlEmployee, emp);
+    }
+    putEmployee(id) {
+        let emp = new Employee();
+        emp = dataForm("#formAdd", emp);
+        delete emp.genderName;
+        delete emp.positionName;
+        delete emp.departmentName;
+        putData(_urlEmployee, id, emp);
     }
 }

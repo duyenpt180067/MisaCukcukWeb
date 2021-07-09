@@ -64,7 +64,9 @@ $('#findbygender, #gender').on('click', function() {
             //     'background-color': '#fff',
             //     'border-right': '1px solid #01b075'
             // });
-            chooseOption('#gender', '.genders');
+            chooseOption('#gender', '.genders', function(res) {
+                $('#gender').data(res);
+            });
         });
     } else {
         hideOption('.all-gender', function() {});
@@ -83,7 +85,9 @@ $('#findbyposition, #position').on('click', function() {
     checkGender = false;
     checkFormDepartment = false;
     checkStatus = false;
-    chooseOption('#position', '.positions');
+    chooseOption('#position', '.positions', function(res) {
+        $('#position').data(res);
+    });
     if (checkPosition == true) {
         showOption('.all-position', function() {});
     }
@@ -104,7 +108,9 @@ $('#findbyformdepartment, #formdepartment').on('click', function() {
     checkPosition = false;
     checkGender = false;
     checkStatus = false;
-    chooseOption('#formdepartment', '.formdepartments');
+    chooseOption('#formdepartment', '.formdepartments', function(res) {
+        $("#formdepartment").data(res);
+    });
     if (checkFormDepartment == true) {
         showOption('.all-formdepartment', function() {});
     }
@@ -125,7 +131,9 @@ $('#findbystatus, #status').on('click', function() {
     checkPosition = false;
     checkGender = false;
     checkFormDepartment = false;
-    chooseOption('#status', '.statuss');
+    chooseOption('#status', '.statuss', function(res) {
+        $("#status").data(res);
+    });
     if (checkStatus == true) {
         showOption('.all-status', function() {});
     }
@@ -138,13 +146,3 @@ $('#findbystatus, #status').on('click', function() {
     });
     delOption('#status', null);
 })
-
-/**
- *  Post Employee
- * Author: PTDuyen(8/7/2021)
- */
-var urlEmp = "http://cukcuk.manhnv.net/v1/Employees";
-
-function postEmployee(_urlEmp) {
-
-}

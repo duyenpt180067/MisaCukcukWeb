@@ -156,16 +156,16 @@
                 <table id="table">
                     <thead>
                         <tr>
-                            <th fieldName="employeeCode">Mã nhân viên</th>
-                            <th fieldName="fullName">Họ và tên</th>
-                            <th fieldName="genderName">Giới tính</th>
-                            <th fieldName="dateOfBirth" style="text-align: center;">Ngày sinh</th>
-                            <th fieldName="phoneNumber">Điện thoại</th>
-                            <th fieldName="email">Email</th>
-                            <th fieldName="positionName">Chức vụ</th>
-                            <th fieldName="departmentName">Phòng ban</th>
-                            <th fieldName="salary" style="text-align: end;">Mức lương cơ bản</th>
-                            <th fieldName="workStatus">Tình trạng</th>
+                            <th fieldName="EmployeeCode">Mã nhân viên</th>
+                            <th fieldName="FullName">Họ và tên</th>
+                            <th fieldName="GenderName">Giới tính</th>
+                            <th fieldName="DateOfBirth" style="text-align: center;">Ngày sinh</th>
+                            <th fieldName="PhoneNumber">Điện thoại</th>
+                            <th fieldName="Email">Email</th>
+                            <th fieldName="PositionName">Chức vụ</th>
+                            <th fieldName="DepartmentName">Phòng ban</th>
+                            <th fieldName="Salary" style="text-align: end;">Mức lương cơ bản</th>
+                            <th fieldName="WorkStatus">Tình trạng</th>
                         </tr>
                     </thead>
                     <!-- </table>
@@ -292,11 +292,9 @@
                                             <option value="employee">Nhân viên</option>
                                         </select> -->
                                         <div class="find-select find-position info">
-                                            <input name="" fieldName="PositionNmae" id="position" class="position infoinput select" readonly="true" placeholder="Chọn vị trí" name="">
+                                            <input name="" fieldName="PositionName" id="position" class="position infoinput select" readonly="true" placeholder="Chọn vị trí" name="">
                                             <div class="xselect"><i class="fas fa-times"></i></div>
                                             <div class="select-option all-position">
-                                                <div id="" class="positions">Giám đốc</div>
-                                                <div id="" class="positions">Nhân viên</div>
                                             </div>
                                             <div class="div-arrow arrow-info" id="findbyposition">
                                                 <i class="fas fa-chevron-down arrow"></i>
@@ -314,8 +312,6 @@
                                             <input name="" fieldName="DepartmentName" id="formdepartment" class="formdepartment infoinput select" readonly="true" placeholder="Chọn phòng ban" name="">
                                             <div class="xselect"><i class="fas fa-times"></i></div>
                                             <div class="select-option all-formdepartment">
-                                                <div id="" class="formdepartments">Phòng nhân sự</div>
-                                                <div id="" class="formdepartments">Phòng kế toán</div>
                                             </div>
                                             <div class="div-arrow arrow-info" id="findbyformdepartment">
                                                 <i class="fas fa-chevron-down arrow"></i>
@@ -327,7 +323,7 @@
                                 <div class="row">
                                     <div class="col-6 infoinput">
                                         <p>Mã số thuê cá nhân</p>
-                                        <input type="number" field="PersonalTaxCode" name="tax" id="tax">
+                                        <input type="number" fieldName="PersonalTaxCode" name="tax" id="tax">
                                         <div class="xselect"><i class="fas fa-times"></i></div>
                                     </div>
                                     <div class="col-6 infoinput">

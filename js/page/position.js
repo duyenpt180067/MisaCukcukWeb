@@ -22,6 +22,7 @@ export default class Position {
             $.each(res, function(index, item) {
                 var div = $(`<div></div>`);
                 div.addClass(classOption);
+                div.data(item);
                 div.append(item.PositionName);
                 div.attr("id", item.PositionId);
                 $(parentOption).append(div);
@@ -44,4 +45,5 @@ export default class Position {
 $(document).ready(function() {
     var position = new Position();
     position.loadOption(position.urlGetAll, "jobs", ".all-job");
+    position.loadOption(position.urlGetAll, "positions", ".all-position");
 })

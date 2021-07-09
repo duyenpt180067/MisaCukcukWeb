@@ -21,6 +21,7 @@ export default class Department {
             $.each(res, function(index, item) {
                 var div = $(`<div></div>`);
                 div.addClass(classOption);
+                div.data(item);
                 div.append(item.DepartmentName);
                 div.attr("id", item.DepartmentId);
                 $(parentOption).append(div);
@@ -43,4 +44,5 @@ export default class Department {
 $(document).ready(function() {
     var department = new Department();
     department.loadOption(department.urlGetAll, "departments", ".all-department");
+    department.loadOption(department.urlGetAll, "formdepartments", ".all-formdepartment");
 })

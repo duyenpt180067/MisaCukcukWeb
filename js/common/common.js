@@ -54,7 +54,7 @@ function chooseOption(id_select, name_option, _function) {
         $(id_select).val($(this).text());
         $(id_select).next().css('visibility', 'visible');
         hideOption('.select-option', function() {});
-        _function(this.id)
+        _function($(this).data());
     })
 }
 
@@ -99,40 +99,38 @@ function validateForm() {
 
     $.each(formInput, function(index, _input) {
         $(_input).on('focus', function() {
-            console.log($(_input).val());
+            // console.log($(_input).val());
             if ($(_input).siblings('.select-option').length == 0) {
                 $(_input).addClass('input-focus');
             }
             if ($(_input).val() != "") {
                 $(_input).siblings(".xselect").css('visibility', 'visible');
-                console.log("ok")
+                // console.log("ok")
                 delOption(_input, "");
             }
         })
         $(_input).on('change', function() {
-            console.log($(_input).val());
             if (($(_input).siblings('.select-option').length == 0)) {
                 $(_input).addClass('input-focus');
             }
             if ($(_input).val() != "") {
                 $(_input).siblings(".xselect").css('visibility', 'visible');
-                console.log("ok")
+                // console.log("ok")
                 delOption(_input, "");
             }
         })
         $(_input).on('focusout', function() {
-            console.log($(_input).parent().attr('class'));
+            // console.log($(_input).parent().attr('class'));
             if ($(_input).siblings('.select-option').length == 0) {
                 $(_input).removeClass('input-focus');
             }
         })
         if ($(_input).attr('validate')) {
             var validate = $(_input).attr('validate');
-            $(_input).on('change', function() {
+            $(_input).on('focus', function() {
                 if (($(_input).val() != "")) {
                     if ($(_input).attr('fieldName') == "Email") {
                         if ((email.test($(_input).val()) == false) && ($(_input).val() != "")) {
-                            console.log("ok")
                             $(_input).attr('data-original-title', 'Vui lòng nhập đúng định dạng email!');
                             $(_input).addClass("invalid-input");
                             $(_input).tooltip('show');
@@ -151,14 +149,14 @@ function validateForm() {
                         }
                     }
                 } else {
-                    console.log("okasa")
+                    // console.log("okasa")
                     $(_input).removeClass('focus-input');
                     $(_input).attr('data-original-title', 'Vui lòng nhập ' + validate);
                     $(_input).addClass("invalid-input");
                 }
             })
             $(_input).attr('title')
-            console.log(validate);
+                // console.log(validate);
         }
     })
 }
@@ -174,14 +172,16 @@ function loadTable(listObj) {
         // get element of th
         var thData = $('table thead tr th');
         var tr = $(`<tr></tr>`);
+        tr.data(obj);
         // map td with th 
         $.each(thData, function(index, _item) {
             var fieldName = $(_item).attr('fieldName');
             var value = obj[fieldName];
-            if (fieldName.includes("date")) {
+            var field = fieldName + '';
+            if (field.toLowerCase().includes("date")) {
                 var td = $(`<td style="text-align: center;"></td>`);
                 td.append(value);
-            } else if (fieldName == "salary") {
+            } else if (field.toLowerCase() == "salary") {
                 var td = $(`<td style="text-align: end;"></td>`);
                 td.append(value);
             } else {
